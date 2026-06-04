@@ -1,0 +1,160 @@
+.sidebar {
+  background: #ffffff;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-right: 1px solid #e5e7eb;
+  width: 272px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.collapsed {
+  width: 76px;
+}
+
+.collapsed:hover {
+  width: 272px;
+  box-shadow: 8px 0 24px rgba(15, 23, 42, 0.1);
+  z-index: 50;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  min-height: 72px;
+  overflow: hidden;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: max-content;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 10px 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling */
+.nav::-webkit-scrollbar {
+  width: 6px;
+}
+.nav::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.22);
+  border-radius: 3px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  height: 38px;
+  border-radius: 8px;
+  color: #475569;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+}
+
+.navItemActive {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 #2563eb;
+}
+
+.navItem:hover:not(.navItemActive) {
+  background-color: #f8fafc;
+  color: #0f172a;
+  transform: translateX(1px);
+}
+
+.icon {
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.collapsed:not(:hover) .navText,
+.collapsed:not(:hover) .chevron,
+.collapsed:not(:hover) .subMenu,
+.collapsed:not(:hover) .headerContent,
+.collapsed:not(:hover) .headerText,
+.collapsed:not(:hover) .sectionLabel,
+.collapsed:not(:hover) .footerText {
+  display: none;
+}
+
+.collapsed:not(:hover) .navItem {
+  justify-content: center;
+  padding: 0;
+}
+
+.collapsed:not(:hover) .header {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.subNavItem {
+  padding-left: 36px !important;
+  height: 34px !important;
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.subNavItem .icon {
+  min-width: 16px;
+  height: 16px;
+}
+
+.sectionLabel {
+  padding: 12px 10px 6px;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer {
+  border-top: 1px solid #eef2f7;
+  padding: 12px;
+}
+
+.footerCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 10px;
+}

@@ -1,0 +1,46 @@
+{
+  "name": "smart-task-management",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
+    "@prisma/client": "^7.8.0",
+    "bcryptjs": "^3.0.3",
+    "clsx": "^2.1.1",
+    "critters": "^0.0.23",
+    "dotenv": "^17.4.2",
+    "jose": "^6.0.12",
+    "lucide-react": "^0.526.0",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-hook-form": "^7.61.1",
+    "react-hot-toast": "^2.5.2",
+    "recharts": "^3.1.2",
+    "swr": "^2.3.4",
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.0.10",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9",
+    "eslint-config-next": "^16.2.6",
+    "postcss": "^8.5.6",
+    "prisma": "^7.8.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  }
+}
