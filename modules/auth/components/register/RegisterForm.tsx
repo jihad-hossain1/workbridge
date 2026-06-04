@@ -47,6 +47,7 @@ export const RegisterForm = () => {
         firstName: data.name.split(" ")[0],
         lastName: data.name.split(" ")[1] || data.name.split(" ")[0],
       });
+      console.log("🚀 ~ onSubmit ~ response:", response);
 
       setIsLoading(false);
 
@@ -55,12 +56,14 @@ export const RegisterForm = () => {
         reset();
         // Redirect to login after successful registration
         setTimeout(() => {
-          router.push("/user-verify?email=" + data?.email);
+          router.push("/login");
         }, 2000);
 
         return;
       } else {
-        setErrorMessage("Registration failed. Please try again.");
+        setErrorMessage(
+          response?.error || "Registration failed. Please try again.",
+        );
       }
     } catch (error) {
       console.error(error);

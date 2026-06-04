@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { Form } from "@/modules/auth/components/login/form";
 
@@ -25,20 +24,6 @@ const WorkBridgeLoginPage = () => {
         <div className="bg-white py-8 px-4 shadow-xl rounded-lg sm:px-10 border border-gray-200">
           <Form />
           {/* Quick Access Links */}
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <Link
-              href="/demo"
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              View Demo
-            </Link>
-            <Link
-              href="#"
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              Documentation
-            </Link>
-          </div>
         </div>
 
         {/* Footer Links */}
@@ -57,8 +42,7 @@ const WorkBridgeLoginPage = () => {
             </Link>
           </div>
           <p className="mt-2">
-            © {new Date().getFullYear()} WorkBridge. All rights
-            reserved.
+            © {new Date().getFullYear()} WorkBridge. All rights reserved.
           </p>
         </div>
       </div>

@@ -1,68 +1,121 @@
 import { RegisterForm } from "@/modules/auth/components/register/RegisterForm";
 import Link from "next/link";
-import React from "react";
 
 const page = () => {
+  const features = [
+    "Organize projects, tasks, and team roles in one workspace.",
+    "Keep conversations, files, and activity history connected.",
+    "Start with secure access controls for every collaborator.",
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center max-sm:p-6  lg:px-8">
-      {/* Header */}
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-          <div className="h-12 px-4 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-xl">WorkBridge</span>
-          </div>
-        </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Task Collaboration Platform
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Sign in to access your enterprise dashboard
-        </p>
-      </div>
+    <main className="min-h-screen bg-slate-50 text-slate-950">
+      <div className="grid min-h-screen lg:grid-cols-[1.05fr_0.95fr]">
+        <section className="relative hidden overflow-hidden bg-slate-950 px-10 py-10 text-white lg:flex lg:flex-col lg:justify-between">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(14,165,233,0.28),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(34,197,94,0.18),transparent_28%),linear-gradient(145deg,#020617_0%,#0f172a_55%,#111827_100%)]" />
+          <div className="absolute -right-28 top-24 h-72 w-72 rounded-full border border-white/10" />
+          <div className="absolute bottom-20 left-12 h-40 w-40 rounded-full border border-cyan-300/20" />
 
-      {/* Login Form */}
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-xl rounded-lg sm:px-10 border border-gray-200">
-          <RegisterForm />
-          {/* Quick Access Links */}
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <Link
-              href="/demo"
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              View Demo
-            </Link>
-            <Link
-              href="#"
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              Documentation
+          <div className="relative z-10">
+            <Link href="/" className="inline-flex items-center gap-3">
+              <span className="flex h-11 w-11 items-center justify-center rounded-md bg-white text-lg font-black text-slate-950">
+                W
+              </span>
+              <span className="text-xl font-semibold tracking-tight">
+                WorkBridge
+              </span>
             </Link>
           </div>
-        </div>
 
-        {/* Footer Links */}
-        <div className="mt-6 text-center text-sm text-gray-500">
-          <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center">
-            <Link href="#" className="hover:text-gray-700 transition-colors">
-              Privacy Policy
-            </Link>
-            <span className="hidden sm:inline">•</span>
-            <Link href="#" className="hover:text-gray-700 transition-colors">
-              Terms of Service
-            </Link>
-            <span className="hidden sm:inline">•</span>
-            <Link href="#" className="hover:text-gray-700 transition-colors">
-              Security
-            </Link>
+          <div className="relative z-10 max-w-xl">
+            <p className="mb-4 inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 text-sm text-cyan-100">
+              Task collaboration made clear
+            </p>
+            <h1 className="text-5xl font-semibold leading-tight tracking-tight">
+              Build a workspace your team can trust from day one.
+            </h1>
+            <p className="mt-5 max-w-lg text-base leading-7 text-slate-300">
+              Create your account, invite teammates, and keep every project
+              moving with shared ownership and clean visibility.
+            </p>
+
+            <div className="mt-10 grid gap-3">
+              {features.map((feature) => (
+                <div
+                  key={feature}
+                  className="flex items-start gap-3 rounded-md border border-white/10 bg-white/[0.06] p-4"
+                >
+                  <span className="mt-1 h-2.5 w-2.5 rounded-full bg-cyan-300" />
+                  <p className="text-sm leading-6 text-slate-200">{feature}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <p className="mt-2">
-            © {new Date().getFullYear()} WorkBridge. All rights
-            reserved.
-          </p>
-        </div>
+
+          <div className="relative z-10 flex items-center justify-between border-t border-white/10 pt-6 text-sm text-slate-400">
+            <span>Fast setup</span>
+            <span>Role-based access</span>
+            <span>Project history</span>
+          </div>
+        </section>
+
+        <section className="flex min-h-screen items-center justify-center px-4 py-8 sm:px-6 lg:px-12">
+          <div className="w-full max-w-[520px]">
+            <div className="mb-8 flex items-center justify-between lg:hidden">
+              <Link href="/" className="inline-flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-md bg-slate-950 text-base font-black text-white">
+                  W
+                </span>
+                <span className="text-lg font-semibold tracking-tight">
+                  WorkBridge
+                </span>
+              </Link>
+              <Link
+                href="/login"
+                className="text-sm font-medium text-cyan-700 hover:text-cyan-900"
+              >
+                Sign in
+              </Link>
+            </div>
+
+            <div className="mb-7">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-700">
+                Create account
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">
+                Join WorkBridge
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Register your workspace profile and start managing tasks with
+                your team.
+              </p>
+            </div>
+
+            <div className="rounded-lg border border-slate-200 bg-white px-5 py-6 shadow-sm sm:px-8 sm:py-8">
+              <RegisterForm />
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-slate-500">
+              <Link href="#" className="hover:text-slate-800">
+                Privacy Policy
+              </Link>
+              <span className="text-slate-300">/</span>
+              <Link href="#" className="hover:text-slate-800">
+                Terms
+              </Link>
+              <span className="text-slate-300">/</span>
+              <Link href="#" className="hover:text-slate-800">
+                Security
+              </Link>
+            </div>
+
+            <p className="mt-3 text-center text-xs text-slate-400">
+              © {new Date().getFullYear()} WorkBridge. All rights reserved.
+            </p>
+          </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
     const payload = body.jsonData || body; // support both direct and nested under jsonData
 
     const parsed = RegisterSchema.safeParse(payload);
+    console.log("🚀 ~ POST ~ parsed:", parsed);
     if (!parsed.success) {
       return errorResponse("Validation Error", parsed.error.format());
     }
@@ -60,10 +61,14 @@ export async function POST(req: NextRequest) {
         role: newUser.role,
       },
       "Registration successful",
-      201
+      201,
     );
   } catch (error) {
-    console.error("Register Error:", error);
-    return errorResponse((error as Error).message || "Internal Server Error", null, 500);
+    console.log("🚀 ~ POST ~ error:", (error as Error).message);
+    return errorResponse(
+      (error as Error).message || "Internal Server Error",
+      null,
+      500,
+    );
   }
 }

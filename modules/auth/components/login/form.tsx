@@ -16,6 +16,11 @@ type FormInputs = {
   password: string;
 };
 
+const demoCredentials: FormInputs = {
+  email: "jihadkhan934@gmail.com",
+  password: "123456",
+};
+
 export const Form = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -29,6 +34,7 @@ export const Form = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormInputs>();
 
@@ -89,6 +95,12 @@ export const Form = () => {
     } finally {
       setIsApplyLoading(false);
     }
+  };
+
+  const handleDemoLogin = async () => {
+    setValue("email", demoCredentials.email, { shouldValidate: true });
+    setValue("password", demoCredentials.password, { shouldValidate: true });
+    await onSubmit(demoCredentials);
   };
 
   useEffect(() => {
@@ -158,12 +170,47 @@ export const Form = () => {
           )}
         </div>
 
+        <DemoLoginButton
+          isLoading={isLoading}
+          handleDemoLogin={handleDemoLogin}
+        />
         <SubmitButton isLoading={isLoading} />
       </form>
       <Footer />
     </div>
   );
 };
+
+function DemoLoginButton({
+  isLoading,
+  handleDemoLogin,
+}: {
+  isLoading: boolean;
+  handleDemoLogin: () => Promise<void>;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={handleDemoLogin}
+      disabled={isLoading}
+      className="w-full rounded-md border border-cyan-200 bg-cyan-50 px-4 py-3 text-left transition-colors hover:border-cyan-300 hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      <span className="flex items-center justify-between gap-3">
+        <span>
+          <span className="block text-sm font-semibold text-slate-800">
+            Login with demo credentials
+          </span>
+          <span className="mt-1 block text-xs text-slate-500">
+            {demoCredentials.email} / {demoCredentials.password}
+          </span>
+        </span>
+        <span className="text-sm font-semibold text-cyan-700">
+          {isLoading ? "Signing in..." : "Use demo"}
+        </span>
+      </span>
+    </button>
+  );
+}
 
 function SubmitButton({ isLoading }: { isLoading: boolean }) {
   return (
@@ -185,23 +232,22 @@ function SubmitButton({ isLoading }: { isLoading: boolean }) {
           Forgot password?
         </a>
       </div>
-      <div className="w-full flex justify-center">
-        <Button
-          type="submit"
-          disabled={isLoading}
-          button_color="ocean"
-          className="w-1/3 font-semibold transition-all duration-300 transform hover:scale-[1.02] disabled:transform-none"
-        >
-          {isLoading ? (
-            <span className="flex items-center justify-center">
-              <icons.loader className="mr-2 animate-spin h-4 w-4 2xl:h-5 2xl:w-5" />
-              Signing in...
-            </span>
-          ) : (
-            "Sign in to Account"
-          )}
-        </Button>
-      </div>
+      <Button
+        type="submit"
+        disabled={isLoading}
+        button_color="ocean"
+        size="lg"
+        className="w-full font-semibold transition-all duration-300 transform hover:scale-[1.02] disabled:transform-none"
+      >
+        {isLoading ? (
+          <span className="flex items-center justify-center">
+            <icons.loader className="mr-2 animate-spin h-4 w-4 2xl:h-5 2xl:w-5" />
+            Signing in...
+          </span>
+        ) : (
+          "Sign in to Account"
+        )}
+      </Button>
     </>
   );
 }
