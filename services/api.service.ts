@@ -36,3 +36,7 @@ export const task_api = {
   attachments_post: (taskId: string) =>
     `${baseUrl}/tasks/${taskId}/attachments`,
 };
+
+export const analytics_api = {
+  dashboard_get: () => `${baseUrl}/dashboard/analytics`,
+};

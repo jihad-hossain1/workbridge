@@ -10,11 +10,16 @@ import { cn } from "@/utils/cn";
 
 type IProps = {
   children: React.ReactNode;
+  stats?: React.ReactNode;
+  charts?: React.ReactNode;
+  progress?: React.ReactNode;
+  activities?: React.ReactNode;
 };
 
 const DashboardContent = (props: IProps) => {
-  const { children } = props;
+  const { children, stats, charts, progress, activities } = props;
   const { isCollapsed } = useSidebar();
+  const isDashboard = !!stats;
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -28,7 +33,21 @@ const DashboardContent = (props: IProps) => {
             "mt-[64px]",
           )}
         >
-          <div className="space-y-4 2xl:space-y-5">{children}</div>
+          {isDashboard ? (
+            <div className="space-y-6">
+              {children}
+              {stats}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {charts}
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {progress}
+                {activities}
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4 2xl:space-y-5">{children}</div>
+          )}
         </main>
       </div>
     </div>
