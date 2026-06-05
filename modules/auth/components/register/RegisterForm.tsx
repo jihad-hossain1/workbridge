@@ -47,7 +47,6 @@ export const RegisterForm = () => {
         firstName: data.name.split(" ")[0],
         lastName: data.name.split(" ")[1] || data.name.split(" ")[0],
       });
-      console.log("🚀 ~ onSubmit ~ response:", response);
 
       setIsLoading(false);
 

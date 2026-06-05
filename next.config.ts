@@ -12,75 +12,6 @@ const nextConfig: NextConfig = {
   // Generate sitemap and robots.txt
   trailingSlash: false,
 
-  // Security and SEO headers
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          {
-            key: "X-Frame-Options",
-            value: "DENY",
-          },
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
-          {
-            key: "Referrer-Policy",
-            value: "strict-origin-when-cross-origin",
-          },
-          {
-            key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
-          },
-        ],
-      },
-      {
-        source: "/sitemap.xml",
-        headers: [
-          {
-            key: "Content-Type",
-            value: "application/xml",
-          },
-          {
-            key: "Cache-Control",
-            value: "public, max-age=86400, s-maxage=86400",
-          },
-        ],
-      },
-      {
-        source: "/robots.txt",
-        headers: [
-          {
-            key: "Content-Type",
-            value: "text/plain",
-          },
-          {
-            key: "Cache-Control",
-            value: "public, max-age=86400, s-maxage=86400",
-          },
-        ],
-      },
-    ];
-  },
-
-  // Redirects for SEO
-  async redirects() {
-    return [
-      {
-        source: "/home",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/contact-us",
-        destination: "/contact",
-        permanent: true,
-      },
-    ];
-  },
-
   // Image optimization
   images: {
     formats: ["image/webp", "image/avif"],
@@ -109,12 +40,6 @@ const nextConfig: NextConfig = {
 
   // PWA and performance optimizations
   poweredByHeader: false,
-
-  // Environment variables for SEO
-  env: {
-    SITE_URL: process.env.SITE_URL || "https://www.b2cbs.xyz",
-    SITE_NAME: "B2C Business Solutions",
-  },
 };
 
 export default nextConfig;
