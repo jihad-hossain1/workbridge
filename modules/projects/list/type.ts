@@ -25,8 +25,7 @@ export type State = {
   dataList: TDataList[];
   filter: {
     query?: string;
-    fromDate?: string;
-    toDate?: string;
+    status?: string;
   };
   page: number;
   pageSize: number;

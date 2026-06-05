@@ -10,5 +10,6 @@ export const auth_api = {
 export const project_api = {
   list_get: (q: string) => `${baseUrl}/projects?${q}`,
   new_post: () => `${baseUrl}/projects`,
-  update_put: () => `${baseUrl}/projects`,
+  update_put: (id: string) => `${baseUrl}/projects/${id}`,
+  delete_delete: (id: string) => `${baseUrl}/projects/${id}`,
 };

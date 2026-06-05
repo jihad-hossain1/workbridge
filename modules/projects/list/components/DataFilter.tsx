@@ -1,12 +1,24 @@
 import { useDataContext } from "../hooks/useDataContext";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { debounce } from "@/utils/debounce";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogClose,
+} from "@/components/ui/dialog/dialog";
+import { X, Search, Plus } from "lucide-react";
+import { Manage } from "../../new/manage";
 
-export const DataFilter = () => {
-  const { updateSearch, filter, updateDateRange } = useDataContext();
-  const [query, setQuery] = React.useState(filter.query || "");
+interface DataFilterProps {
+  refetch?: () => void;
+}
+
+export const DataFilter = ({ refetch }: DataFilterProps) => {
+  const { updateSearch, filter, setStatusFilter } = useDataContext();
+  const [query, setQuery] = useState(filter.query || "");
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const debouncedUpdateSearch = useCallback(
     debounce((query: string) => {
@@ -27,59 +39,73 @@ export const DataFilter = () => {
     setQuery(filter?.query || "");
   }, [filter?.query]);
 
+  const activeStatus = filter?.status || "ACTIVE";
+
   return (
-    <div className="flex flex-col 2xl:flex-row justify-start 2xl:justify-between 2xl:items-center">
-      <Input
-        // key={query ?? "default_query"}
-        id="data-search"
-        name="data-search"
-        className="w-full lg:w-[360px] 2xl:w-[400px]"
-        type="text"
-        onChange={(e) => handleSearchChange(e.target.value)}
-        value={query}
-        placeholder="Search data"
-        label="Search"
-      />
+    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100 bg-white p-4 rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.01)]">
+      {/* Left side: Search input */}
+      <div className="w-full md:max-w-xs lg:w-[320px]">
+        <Input
+          id="data-search"
+          name="data-search"
+          type="text"
+          onChange={(e) => handleSearchChange(e.target.value)}
+          value={query}
+          placeholder="Search projects by name or code..."
+          leftIcon={<Search className="h-4 w-4 text-slate-400" />}
+          className="w-full bg-slate-50 border-slate-200/60 rounded-lg text-slate-800 placeholder:text-slate-400 py-1.5 focus:bg-white focus:border-blue-500 transition-all duration-200"
+        />
+      </div>
 
-      <section className="flex flex-row justify-start  2xl:items-center gap-2">
-        <div className="flex flex-col lg:flex-row justify-start lg:items-center gap-2">
-          <Input
-            type="date"
-            className="text-sm"
-            id="date-search-from"
-            name="date-search-from"
-            label="From"
-            value={filter?.fromDate as string}
-            onChange={(e) => {
-              updateDateRange({
-                fromDate: e.target.value,
-                toDate: filter?.toDate || "",
-              });
-            }}
-          />
-          <Input
-            type="date"
-            id="date-search-to"
-            name="date-search-to"
-            label="To"
-            className=""
-            value={filter?.toDate as string}
-            onChange={(e) => {
-              updateDateRange({
-                fromDate: filter?.fromDate || "",
-                toDate: e.target.value,
-              });
-            }}
-          />
+      {/* Right side: Tabs filter and CTA button */}
+      <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+        {/* Tab filters */}
+        <div className="bg-slate-100/80 p-0.5 rounded-lg flex items-center gap-1 border border-slate-200/40">
+          {["ACTIVE", "ARCHIVED", "ALL"].map((status) => {
+            const isActive = activeStatus === status;
+            return (
+              <button
+                key={status}
+                onClick={() => {
+                  setStatusFilter(status);
+                }}
+                className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
+                  isActive
+                    ? "bg-white text-slate-800 shadow-sm border border-slate-200/50"
+                    : "text-slate-500 hover:text-slate-800 hover:bg-white/40"
+                }`}
+              >
+                {status.charAt(0) + status.slice(1).toLowerCase()}
+              </button>
+            );
+          })}
         </div>
 
-        <div className="flex 2xl:flex-row justify-start 2xl:justify-between 2xl:items-center gap-5">
-          {/* <div className="pt-6">
-              <ResetButton />
-            </div> */}
-          <Button size="xs">New Project</Button>
-        </div>
-      </section>
+        {/* Action Button */}
+        <Button
+          onClick={() => setIsCreateOpen(true)}
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg shadow-sm"
+          button_color="primary"
+          icon={<Plus className="h-3.5 w-3.5" />}
+        >
+          New Project
+        </Button>
+      </div>
+
+      {/* Create Project Modal */}
+      <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+        <DialogContent className="max-w-2xl mx-auto p-0 rounded-xl overflow-hidden">
+          <DialogClose className="absolute right-4 top-4 z-10">
+            <X className="text-slate-450 hover:text-slate-700 h-4 w-4 transition-colors" />
+          </DialogClose>
+          <Manage
+            refetch={() => {
+              refetch?.();
+              setIsCreateOpen(false);
+            }}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
