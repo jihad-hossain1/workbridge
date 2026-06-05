@@ -14,3 +14,8 @@ export const project_api = {
   delete_delete: (id: string) => `${baseUrl}/projects/${id}`,
   view_get: (id: string) => `${baseUrl}/projects/${id}`,
 };
+
+export const user_api = {
+  list_get: (query: string = "") => `${baseUrl}/users?${query}`,
+  update_role_patch: () => `${baseUrl}/users`,
+};
