@@ -62,8 +62,8 @@ const DataContent = () => {
       {/* Modal / Drawers */}
       <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
         <DialogContent className="mx-auto max-w-2xl p-2">
-          <DialogClose className="absolute right-2 left-2">
-            <X className="h-4 w-4" />
+          <DialogClose className="absolute right-2 top-2">
+            <X className="h-4 w-4 text-red-500" />
           </DialogClose>
           <CreateTaskModal refetch={refetch} />
         </DialogContent>

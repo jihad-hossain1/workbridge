@@ -66,15 +66,6 @@ export const CreateTaskModal = ({ refetch }: CreateTaskModalProps) => {
           <CheckSquare className="h-4 w-4 text-blue-600" />
           Initialize Work Task
         </h3>
-        <button
-          onClick={() => {
-            setIsCreateOpen(false);
-            reset();
-          }}
-          className="p-1 text-slate-400 hover:text-slate-650 rounded transition-colors"
-        >
-          <X className="h-4 w-4" />
-        </button>
       </div>
       <form onSubmit={handleSubmit(onCreateSubmit)} className="p-5 space-y-4">
         {/* Selected Project */}

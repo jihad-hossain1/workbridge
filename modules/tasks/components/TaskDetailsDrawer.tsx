@@ -5,7 +5,7 @@ import { task_api } from "@/services/api.service";
 import fetcher from "@/services/fetch.service";
 import toast from "react-hot-toast";
 import { style_success, style_error } from "@/utils/toast-style";
-import { Trash2, X, Calendar, MessageSquare, Paperclip } from "lucide-react";
+import { Calendar, MessageSquare, Paperclip, Loader } from "lucide-react";
 
 interface TaskDetailsDrawerProps {
   refetch?: () => void;
@@ -24,6 +24,11 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
   const [newComment, setNewComment] = useState("");
   const [newAttachmentName, setNewAttachmentName] = useState("");
   const [newAttachmentUrl, setNewAttachmentUrl] = useState("");
+
+  const [isTransitioningStatus, setIsTransitioningStatus] = useState(false);
+  const [isTransitioningPriority, setIsTransitioningPriority] = useState(false);
+  const [isPostingComment, setIsPostingComment] = useState(false);
+  const [isAddingAttachment, setIsAddingAttachment] = useState(false);
 
   // Fetch comments & attachments automatically when activeTask changes
   useEffect(() => {
@@ -55,6 +60,7 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
   const transitionStatus = async (newStatus: TTask["status"]) => {
     if (!activeTask || activeTask.status === newStatus) return;
     try {
+      setIsTransitioningStatus(true);
       const res = await fetcher.put<{ success: boolean }>(
         task_api.update_put(activeTask.id),
         {
@@ -71,6 +77,8 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
         (e as Error).message || "Failed to shift task status",
         style_error,
       );
+    } finally {
+      setIsTransitioningStatus(false);
     }
   };
 
@@ -78,6 +86,7 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
   const transitionPriority = async (newPriority: TTask["priority"]) => {
     if (!activeTask || activeTask.priority === newPriority) return;
     try {
+      setIsTransitioningPriority(true);
       const res = await fetcher.put<{ success: boolean }>(
         task_api.update_put(activeTask.id),
         {
@@ -94,6 +103,8 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
         (e as Error).message || "Failed to update priority",
         style_error,
       );
+    } finally {
+      setIsTransitioningPriority(false);
     }
   };
 
@@ -123,6 +134,7 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
     e.preventDefault();
     if (!activeTask || !newComment.trim()) return;
     try {
+      setIsPostingComment(true);
       const res = await fetcher.post<{ success: boolean; data: TComment }>(
         task_api.comments_post(activeTask.id),
         { content: newComment },
@@ -133,6 +145,8 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
       }
     } catch (error) {
       toast.error("Failed to post comment");
+    } finally {
+      setIsPostingComment(false);
     }
   };
 
@@ -142,6 +156,7 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
     if (!activeTask || !newAttachmentName.trim() || !newAttachmentUrl.trim())
       return;
     try {
+      setIsAddingAttachment(true);
       const res = await fetcher.post<{ success: boolean; data: TAttachment }>(
         task_api.attachments_post(activeTask.id),
         {
@@ -159,6 +174,8 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
       }
     } catch (e) {
       toast.error("Failed to add attachment");
+    } finally {
+      setIsAddingAttachment(false);
     }
   };
 
@@ -193,12 +210,17 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
           {/* Parameters selectors (Status & Priority) */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-50/50 border border-slate-100 p-4 rounded-xl text-xs">
             <div>
-              <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+              <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1">
                 Status
+                {isTransitioningStatus && (
+                  <Loader className="h-3 w-3 animate-spin text-blue-600" />
+                )}
               </span>
               <select
                 value={activeTask.status}
-                disabled={activeTask.status === "COMPLETED"}
+                disabled={
+                  activeTask.status === "COMPLETED" || isTransitioningStatus
+                }
                 onChange={(e) => transitionStatus(e.target.value as any)}
                 className="px-2 py-1 bg-white border border-slate-200 rounded font-semibold text-slate-700 focus:outline-none disabled:bg-slate-100"
               >
@@ -212,13 +234,17 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
             </div>
 
             <div>
-              <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+              <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1">
                 Priority
+                {isTransitioningPriority && (
+                  <Loader className="h-3 w-3 animate-spin text-blue-600" />
+                )}
               </span>
               <select
                 value={activeTask.priority}
+                disabled={isTransitioningPriority}
                 onChange={(e) => transitionPriority(e.target.value as any)}
-                className="px-2 py-1 bg-white border border-slate-200 rounded font-semibold text-slate-700 focus:outline-none"
+                className="px-2 py-1 bg-white border border-slate-200 rounded font-semibold text-slate-700 focus:outline-none disabled:bg-slate-100"
               >
                 <option value="LOW">Low</option>
                 <option value="MEDIUM">Medium</option>
@@ -276,14 +302,20 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
                   type="text"
                   placeholder="Write a message..."
                   value={newComment}
+                  disabled={isPostingComment}
                   onChange={(e) => setNewComment(e.target.value)}
-                  className="flex-1 px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-medium"
+                  className="flex-1 px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-medium disabled:bg-slate-50"
                 />
                 <button
                   type="submit"
-                  className="px-3 py-1.5 text-xs font-semibold bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  disabled={isPostingComment}
+                  className="px-3 py-1.5 text-xs font-semibold bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center min-w-[50px] disabled:opacity-50"
                 >
-                  Post
+                  {isPostingComment ? (
+                    <Loader className="h-3.5 w-3.5 animate-spin" />
+                  ) : (
+                    "Post"
+                  )}
                 </button>
               </form>
 
@@ -332,28 +364,38 @@ export const TaskDetailsDrawer = ({ refetch }: TaskDetailsDrawerProps) => {
                 onSubmit={addAttachment}
                 className="space-y-2 bg-slate-50/50 p-2.5 rounded-lg border border-slate-100"
               >
-                <div className="text-[10px] font-bold text-slate-500">
-                  Log New File Link
+                <div className="text-[10px] font-bold text-slate-500 flex items-center justify-between">
+                  <span>Log New File Link</span>
+                  {isAddingAttachment && (
+                    <Loader className="h-3 w-3 animate-spin text-emerald-600" />
+                  )}
                 </div>
                 <input
                   type="text"
                   placeholder="File Name (e.g. spec.pdf)"
                   value={newAttachmentName}
+                  disabled={isAddingAttachment}
                   onChange={(e) => setNewAttachmentName(e.target.value)}
-                  className="w-full px-2 py-1 text-[10px] border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white font-medium"
+                  className="w-full px-2 py-1 text-[10px] border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white font-medium disabled:bg-slate-50"
                 />
                 <input
                   type="text"
                   placeholder="https://example.com/file"
                   value={newAttachmentUrl}
+                  disabled={isAddingAttachment}
                   onChange={(e) => setNewAttachmentUrl(e.target.value)}
-                  className="w-full px-2 py-1 text-[10px] border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white font-medium"
+                  className="w-full px-2 py-1 text-[10px] border border-slate-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white font-medium disabled:bg-slate-50"
                 />
                 <button
                   type="submit"
-                  className="w-full py-1 text-[10px] font-semibold bg-emerald-600 text-white rounded hover:bg-emerald-700 transition-colors"
+                  disabled={isAddingAttachment}
+                  className="w-full py-1 text-[10px] font-semibold bg-emerald-600 text-white rounded hover:bg-emerald-700 transition-colors flex items-center justify-center disabled:opacity-50"
                 >
-                  Attach File Link
+                  {isAddingAttachment ? (
+                    <Loader className="h-3 w-3 animate-spin" />
+                  ) : (
+                    "Attach File Link"
+                  )}
                 </button>
               </form>
 
