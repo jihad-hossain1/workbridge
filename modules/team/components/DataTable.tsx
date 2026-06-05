@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog/dialog";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { project_api } from "@/services/api.service";
+import { project_api, user_api } from "@/services/api.service";
 
 export const DataTable = (props: TableProps) => {
   const { isLoading, error, dataList, refetch } = props;
@@ -71,8 +71,28 @@ const TableBody = (props: TableProps) => {
   const { page, pageSize } = useDataContext();
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
-  const changeUserRole = (id: any, e: any) => {
-    //
+  const changeUserRole = async (userId: string, newRole: string) => {
+    try {
+      setUpdatingId(userId);
+      const res = await fetcher.patch<{ success: boolean }>(
+        user_api.update_role_patch(),
+        {
+          userId,
+          role: newRole,
+        },
+      );
+      if (res?.success) {
+        toast.success("User role updated successfully");
+        refetch?.();
+      }
+    } catch (error) {
+      toast.error(
+        (error as Error).message ||
+          "Failed to update role. Administrators only.",
+      );
+    } finally {
+      setUpdatingId(null);
+    }
   };
 
   return (
@@ -96,11 +116,9 @@ const TableBody = (props: TableProps) => {
                     {data?.firstName?.charAt(0)}
                     {data?.lastName?.charAt(0)}
                   </div>
-                  <div>
-                    <p className="font-semibold">
-                      {data?.firstName} {data?.lastName}
-                    </p>
-                  </div>
+                  <p className="font-semibold">
+                    {data?.firstName} {data?.lastName}
+                  </p>
                 </div>
               </Table.Cell>
               <Table.Cell>
