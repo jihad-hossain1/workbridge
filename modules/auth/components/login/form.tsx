@@ -48,6 +48,7 @@ export const Form = () => {
         email: data.email,
         password: data.password,
       });
+
       setIsLoading(false);
 
       if ((response as any)?.not_active) {
@@ -63,7 +64,6 @@ export const Form = () => {
           name: response?.data?.username!,
           accessToken: (response as any)?.data?.accessToken,
           _auth_token: (response as any)?.token,
-          businessId: (response as any)?.data?.businessId,
         });
 
         router.push("/main");

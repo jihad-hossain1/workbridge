@@ -60,7 +60,7 @@ export const ForgetForm = () => {
     } catch (error) {
       console.error(
         "error for forgotPassword action: ",
-        (error as Error).message
+        (error as Error).message,
       );
     }
   };
@@ -124,7 +124,7 @@ export const ForgetForm = () => {
     } catch (error) {
       console.error(
         "error for forgotPassword action: ",
-        (error as Error).message
+        (error as Error).message,
       );
     }
   };
@@ -196,7 +196,7 @@ export const ForgetForm = () => {
             {/* Logo */}
             <div className="flex justify-center mb-6">
               <div className="w-16 h-16 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-xl">B2C</span>
+                <span className="text-white font-bold text-xl">WB</span>
               </div>
             </div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-cyan-700 bg-clip-text text-transparent mb-2">
@@ -251,7 +251,7 @@ export const ForgetForm = () => {
             {/* Logo */}
             <div className="flex justify-center mb-6">
               <div className="w-16 h-16 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-xl">B2C</span>
+                <span className="text-white font-bold text-xl">WB</span>
               </div>
             </div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-cyan-700 bg-clip-text text-transparent mb-2">
