@@ -1,22 +1,17 @@
 import { DataTableError } from "@/components/ui/table/error";
 import { NoDataFound } from "@/components/ui/table/not-found";
 import { TableProps, TDataList } from "../type";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-} from "@/components/ui/dialog/dialog";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { project_api, user_api } from "@/services/api.service";
+import { user_api } from "@/services/api.service";
 
 export const DataTable = (props: TableProps) => {
   const { isLoading, error, dataList, refetch } = props;
 
   const renderTable = () => {
-    if (isLoading) return <DataTableSkeleton cellLength={6} />;
-    if (error) return <DataTableError cellLength={6} />;
-    if (dataList?.length == 0) return <NoDataFound cellLength={6} />;
+    if (isLoading) return <DataTableSkeleton cellLength={5} />;
+    if (error) return <DataTableError cellLength={5} />;
+    if (dataList?.length == 0) return <NoDataFound cellLength={5} />;
     return <TableBody refetch={refetch} dataList={dataList} />;
   };
 
@@ -44,15 +39,6 @@ import { Loader, Mail, Shield, ShieldCheck, ShieldX } from "lucide-react";
 import { Table } from "@/components/ui/table/table";
 import { useDataContext } from "../hooks/useDataContext";
 import { DataTableSkeleton } from "@/components/ui/table/skeleton";
-
-const COLORS = [
-  "#3b82f6",
-  "#10b981",
-  "#f59e0b",
-  "#ef4444",
-  "#8b5cf6",
-  "#64748b",
-];
 
 const ROLE_ICONS = {
   ADMIN: ShieldX,
