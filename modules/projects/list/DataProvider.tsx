@@ -2,46 +2,45 @@ import React from "react";
 import { Action, State } from "./type";
 
 const initialState: State = {
-    dataList: [],
-    filter: {
-        query: "",
-        fromDate: "",
-        toDate: ""
-    },
-    page: 1,
-    pageSize: 10,
-    totalPages: 0,
+  dataList: [],
+  filter: {
+    query: "",
+    status: "ACTIVE",
+  },
+  page: 1,
+  pageSize: 9,
+  totalPages: 0,
 };
 
 const reducer = (state: State, action: Action): State => {
-    switch (action.type) {
-        case "SET_STATE":
-            return action.payload;
-        case "UPDATE_STATE":
-            return {
-                ...state,
-                ...action.payload,
-            };
-        case "RESET":
-            return initialState;
-        default:
-            throw new Error("Unknown action type");
-    }
+  switch (action.type) {
+    case "SET_STATE":
+      return action.payload;
+    case "UPDATE_STATE":
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case "RESET":
+      return initialState;
+    default:
+      throw new Error("Unknown action type");
+  }
 };
 export const DataContext = React.createContext<{
-    state: State;
-    dispatch: React.Dispatch<Action>;
+  state: State;
+  dispatch: React.Dispatch<Action>;
 }>({
-    state: initialState,
-    dispatch: () => { },
+  state: initialState,
+  dispatch: () => {},
 });
 
 export const DataProvider = ({ children }: { children: React.ReactNode }) => {
-    const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
-    return (
-        <DataContext.Provider value={{ state, dispatch }}>
-            {children}
-        </DataContext.Provider>
-    );
+  return (
+    <DataContext.Provider value={{ state, dispatch }}>
+      {children}
+    </DataContext.Provider>
+  );
 };

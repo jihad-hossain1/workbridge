@@ -11,9 +11,8 @@ export const useFetchData = () => {
   const buildQuery = utilService.buildQuery({
     page,
     limit: pageSize,
-    searchTerm: filter.query,
-    fromDate: filter.fromDate,
-    toDate: filter.toDate,
+    search: filter.query,
+    status: filter.status,
   });
 
   const { data, isLoading, mutate, error } = useSwrFetch<any>(

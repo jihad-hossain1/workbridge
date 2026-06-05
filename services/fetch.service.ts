@@ -7,9 +7,10 @@ class FetchService {
     method: string,
     path: string,
     data?: any,
-    headers?: Record<string, string>
+    headers?: Record<string, string>,
   ): Promise<T> {
-    const url = _baseUrl + path;
+    const url = path;
+    // const url = _baseUrl + path;
     const token = useAuthStore.getState().accessToken;
     const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
 

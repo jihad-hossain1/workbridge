@@ -21,7 +21,7 @@ const DataContent = () => {
 
   return (
     <div className="space-y-6 mt-6">
-      <DataFilter />
+      <DataFilter refetch={refetch as any} />
 
       <DataTable
         refetch={refetch as any}
