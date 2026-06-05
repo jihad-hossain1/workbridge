@@ -23,6 +23,87 @@ const UpdateProjectSchema = z.object({
     .transform((val) => (val ? new Date(val) : null)),
 });
 
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  try {
+    const user = await ServerAuth.serverUser();
+    if (!user) return errorResponse("Unauthorized", null, 401);
+
+    const { id } = await params;
+
+    // Retrieve membership role for RBAC check
+    const member = await prisma.projectMember.findFirst({
+      where: { projectId: id, userId: user.userId },
+    });
+
+    if (user.role !== "ADMIN" && !member) {
+      return errorResponse(
+        "Forbidden: You are not a member of this project",
+        null,
+        403,
+      );
+    }
+
+    const project = await prisma.project.findUnique({
+      where: { id },
+      include: {
+        members: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                email: true,
+                role: true,
+              },
+            },
+          },
+        },
+        tasks: {
+          include: {
+            assignee: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+              },
+            },
+          },
+          orderBy: { createdAt: "desc" },
+        },
+      },
+    });
+
+    if (!project) return errorResponse("Project not found", null, 404);
+
+    // Calculate completed/total tasks
+    const totalTasksCount = project.tasks.length;
+    const completedTasksCount = project.tasks.filter(
+      (t) => t.status === "COMPLETED",
+    ).length;
+    const progress =
+      totalTasksCount > 0
+        ? Math.round((completedTasksCount / totalTasksCount) * 100)
+        : 0;
+
+    return successResponse({
+      ...project,
+      progress,
+      totalTasksCount,
+      completedTasksCount,
+    });
+  } catch (error) {
+    return errorResponse(
+      (error as Error).message || "Internal Server Error",
+      null,
+      500,
+    );
+  }
+}
+
 export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },

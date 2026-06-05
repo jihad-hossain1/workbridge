@@ -12,4 +12,5 @@ export const project_api = {
   new_post: () => `${baseUrl}/projects`,
   update_put: (id: string) => `${baseUrl}/projects/${id}`,
   delete_delete: (id: string) => `${baseUrl}/projects/${id}`,
+  view_get: (id: string) => `${baseUrl}/projects/${id}`,
 };

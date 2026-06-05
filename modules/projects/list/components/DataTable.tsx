@@ -259,7 +259,7 @@ const TableBody = (props: TableProps) => {
 
               {/* Name and desc */}
               <a
-                href={`/main/projects/${project.id}`}
+                href={`/main/projects/view?id=${project.id}`}
                 className="block mt-2.5 hover:text-blue-600 transition-colors"
               >
                 <h3 className="font-semibold text-slate-800 text-base group-hover:text-blue-600 transition-colors">

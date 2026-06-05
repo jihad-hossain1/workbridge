@@ -4,6 +4,7 @@ import { clearCookies } from "@/lib/auth/cookie";
 import fetcher from "@/services/fetch.service";
 import { createSession } from "@/lib/auth/session";
 import { TUserRegister } from "@/helpers/validate";
+import { auth_api } from "@/services/api.service";
 
 type FetchResponse =
   | {
@@ -27,7 +28,10 @@ type FetchResponse =
 
 export async function signin(logData: { email: string; password: string }) {
   try {
-    const result = await fetcher.post<FetchResponse>("/auth/login", logData);
+    const result = await fetcher.post<FetchResponse>(
+      auth_api.login_post(),
+      logData,
+    );
 
     // session create
     if (result?.success) {
@@ -58,7 +62,7 @@ export async function signin(logData: { email: string; password: string }) {
 
 export async function register(regData: TUserRegister) {
   try {
-    const result = await fetcher.post<FetchResponse>("/auth/register", {
+    const result = await fetcher.post<FetchResponse>(auth_api.register_post(), {
       jsonData: regData,
       email: regData.email,
     });
