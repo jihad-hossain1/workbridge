@@ -193,18 +193,18 @@ function DemoLoginButton({
       type="button"
       onClick={handleDemoLogin}
       disabled={isLoading}
-      className="w-full rounded-md border border-cyan-200 bg-cyan-50 px-4 py-3 text-left transition-colors hover:border-cyan-300 hover:bg-cyan-100 disabled:cursor-not-allowed disabled:opacity-60"
+      className="w-full rounded-md border border-cyan-200 dark:border-cyan-950 bg-cyan-50 dark:bg-cyan-950/20 px-4 py-3 text-left transition-colors hover:border-cyan-300 dark:hover:border-cyan-800 hover:bg-cyan-100 dark:hover:bg-cyan-900/30 disabled:cursor-not-allowed disabled:opacity-60"
     >
-      <span className="flex items-center justify-between gap-3">
+      <span className="flex items-center justify-between gap-3 bg-transparent">
         <span>
-          <span className="block text-sm font-semibold text-slate-800">
+          <span className="block text-sm font-semibold text-slate-800 dark:text-slate-200">
             Login with demo credentials
           </span>
-          <span className="mt-1 block text-xs text-slate-500">
+          <span className="mt-1 block text-xs text-slate-500 dark:text-slate-450">
             {demoCredentials.email} / {demoCredentials.password}
           </span>
         </span>
-        <span className="text-sm font-semibold text-cyan-700">
+        <span className="text-sm font-semibold text-cyan-700 dark:text-cyan-450">
           {isLoading ? "Signing in..." : "Use demo"}
         </span>
       </span>
@@ -215,19 +215,19 @@ function DemoLoginButton({
 function SubmitButton({ isLoading }: { isLoading: boolean }) {
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between bg-transparent">
         <label className="flex items-center group cursor-pointer">
           <input
             type="checkbox"
-            className="rounded border-slate-300 text-cyan-600 focus:ring-cyan-500 focus:ring-2"
+            className="rounded border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-cyan-600 focus:ring-cyan-500 focus:ring-2"
           />
-          <span className="ml-2 text-sm text-slate-600 group-hover:text-slate-800 transition-colors">
+          <span className="ml-2 text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 transition-colors">
             Remember me
           </span>
         </label>
         <a
           href="/forget-password"
-          className="text-sm text-cyan-600 hover:text-cyan-800 font-medium transition-colors"
+          className="text-sm text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 font-medium transition-colors"
         >
           Forgot password?
         </a>
@@ -254,11 +254,11 @@ function SubmitButton({ isLoading }: { isLoading: boolean }) {
 
 function Header({}) {
   return (
-    <div className="text-center mb-8">
-      <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-cyan-700 bg-clip-text text-transparent mb-2">
+    <div className="text-center mb-8 bg-transparent">
+      <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-cyan-700 dark:from-slate-100 dark:to-cyan-400 bg-clip-text text-transparent mb-2">
         Welcome Back
       </h1>
-      <p className="text-slate-600">Sign in to your {PROJECT_TITLE} account</p>
+      <p className="text-slate-600 dark:text-slate-400">Sign in to your {PROJECT_TITLE} account</p>
     </div>
   );
 }
@@ -266,19 +266,19 @@ function Header({}) {
 function Footer() {
   return (
     <>
-      <div className="mt-6 text-center">
-        <div className="text-sm text-slate-600 mb-4">
+      <div className="mt-6 text-center bg-transparent">
+        <div className="text-sm text-slate-600 dark:text-slate-400 mb-4">
           Don&apos;t have an account?{" "}
           <a
             href="/register"
-            className="text-cyan-600 hover:text-cyan-800 font-semibold transition-colors"
+            className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 font-semibold transition-colors"
           >
             Create Account
           </a>
         </div>
         <a
           href="/"
-          className="inline-flex items-center text-slate-500 hover:text-cyan-600 transition-colors text-sm font-medium"
+          className="inline-flex items-center text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors text-sm font-medium"
         >
           <svg
             className="w-4 h-4 mr-2"
@@ -315,7 +315,7 @@ function ErrorMessage({
     <>
       {errorMessage && (
         <>
-          <div className="flex items-center gap-3 p-4 rounded-lg border-l-4 border-red-500 bg-red-50 shadow-sm">
+          <div className="flex items-center gap-3 p-4 rounded-lg border-l-4 border-red-500 bg-red-50 dark:bg-red-950/20 shadow-sm">
             <svg
               className="h-5 w-5 text-red-500 flex-shrink-0"
               viewBox="0 0 24 24"
@@ -329,7 +329,7 @@ function ErrorMessage({
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
-            <p className="text-red-700 font-medium text-sm">{errorMessage}</p>
+            <p className="text-red-750 dark:text-red-400 font-medium text-sm">{errorMessage}</p>
           </div>
         </>
       )}

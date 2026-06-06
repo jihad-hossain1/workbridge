@@ -24,7 +24,7 @@ const DashboardContent = (props: IProps) => {
   const isDashboard = pathname === "/main" || pathname === "/main/";
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 dark:bg-slate-950 transition-colors duration-200">
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
         <TopBar />

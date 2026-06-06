@@ -42,7 +42,7 @@ export const DataFilter = ({ refetch }: DataFilterProps) => {
   const activeStatus = filter?.status || "ACTIVE";
 
   return (
-    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100 bg-white p-4 rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.01)]">
+    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.01)]">
       {/* Left side: Search input */}
       <div className="w-full md:max-w-xs lg:w-[320px]">
         <Input
@@ -53,14 +53,14 @@ export const DataFilter = ({ refetch }: DataFilterProps) => {
           value={query}
           placeholder="Search projects by name or code..."
           leftIcon={<Search className="h-4 w-4 text-slate-400" />}
-          className="w-full bg-slate-50 border-slate-200/60 rounded-lg text-slate-800 placeholder:text-slate-400 py-1.5 focus:bg-white focus:border-blue-500 transition-all duration-200"
+          className="w-full bg-slate-50 dark:bg-slate-950 border-slate-200/60 dark:border-slate-800 rounded-lg text-slate-800 dark:text-slate-200 placeholder:text-slate-400 py-1.5 focus:bg-white dark:focus:bg-slate-950 focus:border-blue-500 transition-all duration-200"
         />
       </div>
 
       {/* Right side: Tabs filter and CTA button */}
       <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-between md:justify-end">
         {/* Tab filters */}
-        <div className="bg-slate-100/80 p-0.5 rounded-lg flex items-center gap-1 border border-slate-200/40">
+        <div className="bg-slate-100/80 dark:bg-slate-950 p-0.5 rounded-lg flex items-center gap-1 border border-slate-200/40 dark:border-slate-800">
           {["ACTIVE", "ARCHIVED", "ALL"].map((status) => {
             const isActive = activeStatus === status;
             return (
@@ -71,8 +71,8 @@ export const DataFilter = ({ refetch }: DataFilterProps) => {
                 }}
                 className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
                   isActive
-                    ? "bg-white text-slate-800 shadow-sm border border-slate-200/50"
-                    : "text-slate-500 hover:text-slate-800 hover:bg-white/40"
+                    ? "bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 shadow-sm border border-slate-200/50 dark:border-slate-800"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-white/40 dark:hover:bg-slate-900/40"
                 }`}
               >
                 {status.charAt(0) + status.slice(1).toLowerCase()}

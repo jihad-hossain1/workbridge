@@ -17,7 +17,7 @@ export const PageContainer = ({
       <BreadCrumbs />
       <div
         className={cn(
-          "bg-white border border-gray-100 rounded-lg p-2 shadow-sm",
+          "bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-lg p-2 shadow-sm",
           className
         )}
       >

@@ -17,10 +17,10 @@ const TableContext = createContext<TableContextValue>({});
 
 export const Table = ({ children, className, ...props }: TableProps) => {
   return (
-    <div className="w-full  rounded-lg border border-slate-200 shadow-sm bg-white">
+    <div className="w-full rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900">
       <div className="overflow-x-auto">
         <table
-          className={clsx("w-full text-sm text-left text-slate-600", className)}
+          className={clsx("w-full text-sm text-left text-slate-600 dark:text-slate-300", className)}
           {...props}
         >
           {children}
@@ -37,7 +37,7 @@ interface TableHeaderProps {
 export const TableHeader = ({ children }: TableHeaderProps) => {
   return (
     <TableContext.Provider value={{ isHeader: true }}>
-      <thead className="bg-slate-50 border-b border-slate-200 text-slate-700 uppercase text-xs font-semibold tracking-wider">
+      <thead className="bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 uppercase text-xs font-semibold tracking-wider">
         {children}
       </thead>
     </TableContext.Provider>
@@ -50,7 +50,7 @@ interface TableBodyProps {
 
 export const TableBody = ({ children }: TableBodyProps) => {
   return (
-    <tbody className="divide-y divide-slate-100 bg-white">{children}</tbody>
+    <tbody className="divide-y divide-slate-100 dark:divide-slate-800 bg-white dark:bg-slate-900">{children}</tbody>
   );
 };
 
@@ -61,7 +61,7 @@ interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
 export const TableRow = ({ children, className, ...props }: TableRowProps) => {
   return (
     <tr
-      className={clsx("transition-colors hover:bg-slate-50/80", className)}
+      className={clsx("transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-800/50", className)}
       {...props}
     >
       {children}
@@ -106,7 +106,7 @@ export const TableActionsMenu = ({
     <div>
       <DropdownMenu
         trigger={
-          <button className="flex items-center justify-center p-1.5 rounded-full hover:bg-slate-100 transition-colors text-slate-500 hover:text-slate-700">
+          <button className="flex items-center justify-center p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
             <Ellipsis className="h-4 w-4" />
           </button>
         }

@@ -36,10 +36,10 @@ const DataContent = () => {
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-800">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
             Tasks Board
           </h1>
-          <p className="text-sm text-slate-500 mt-0.5">
+          <p className="text-sm text-slate-550 dark:text-slate-400 mt-0.5">
             Organize task statuses, adjust priority matrices, and assign
             actions.
           </p>

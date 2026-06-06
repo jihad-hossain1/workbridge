@@ -37,11 +37,11 @@ export interface SelectProps {
 const selectVariants = {
   variant: {
     default:
-      "border border-gray-300 bg-white hover:border-gray-400 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100",
+      "border border-gray-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-850 dark:text-slate-200 hover:border-gray-400 dark:hover:border-slate-700 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30",
     outline:
-      "border-2 border-blue-200 bg-white hover:border-blue-300 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100",
+      "border-2 border-blue-200 dark:border-blue-900 bg-white dark:bg-slate-900 text-slate-850 dark:text-slate-200 hover:border-blue-300 dark:hover:border-blue-800 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30",
     filled:
-      "border-0 bg-gray-50 hover:bg-gray-100 focus-within:bg-white focus-within:ring-2 focus-within:ring-blue-100 focus-within:border focus-within:border-blue-500",
+      "border-0 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 text-slate-850 dark:text-slate-200 focus-within:bg-white dark:focus-within:bg-slate-900 focus-within:ring-2 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30 focus-within:border focus-within:border-blue-500",
   },
   size: {
     sm: "h-8 px-3 py-1 text-sm",
@@ -207,7 +207,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
     return (
       <div className="w-full" ref={ref}>
         {label && (
-          <label className="block text-sm font-semibold text-gray-700 mb-2 tracking-wide">
+          <label className="block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2 tracking-wide">
             {label}
             {required && <span className="text-red-500 ml-1 font-bold">*</span>}
           </label>
@@ -221,9 +221,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               selectVariants.variant[variant],
               selectVariants.size[size],
               error &&
-                "border-red-400 focus-within:border-red-500 focus-within:ring-red-100",
-              disabled && "cursor-not-allowed opacity-60 bg-gray-100",
-              isOpen && "ring-2 ring-blue-100 border-blue-500 shadow-lg",
+                "border-red-400 dark:border-red-900 focus-within:border-red-500 focus-within:ring-red-100 dark:focus-within:ring-red-950/30",
+              disabled && "cursor-not-allowed opacity-60 bg-gray-100 dark:bg-slate-800",
+              isOpen && "ring-2 ring-blue-100 dark:ring-blue-900/30 border-blue-500 shadow-lg",
               className
             )}
             onClick={() => !disabled && setIsOpen(!isOpen)}
@@ -239,8 +239,8 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               <span
                 className={cn(
                   "block truncate font-medium",
-                  !hasValue && "text-gray-500 font-normal",
-                  hasValue && "text-gray-900"
+                  !hasValue && "text-gray-500 dark:text-slate-400 font-normal",
+                  hasValue && "text-gray-900 dark:text-slate-100"
                 )}
               >
                 {getDisplayValue()}
@@ -250,7 +250,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                 {clearable && hasValue && !disabled && (
                   <button
                     type="button"
-                    className="p-1.5 hover:bg-gray-100 rounded-full transition-colors duration-150 text-gray-400 hover:text-gray-600"
+                    className="p-1.5 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors duration-150 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                     onClick={handleClear}
                     tabIndex={-1}
                   >
@@ -283,7 +283,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
           {isOpen && (
             <div
               className={cn(
-                "absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-xl",
+                "absolute z-50 w-full mt-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg shadow-xl",
                 "max-h-64 overflow-auto animate-in fade-in-0 zoom-in-95 duration-200",
                 "backdrop-blur-sm",
                 dropdownClassName
@@ -311,12 +311,12 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                         key={option.value}
                         className={cn(
                           "relative cursor-pointer select-none 2xl:px-4 2xl:py-3 px-3 py-1 text-xs 2xl:text-sm transition-all duration-150",
-                          "hover:bg-blue-50 hover:text-blue-700",
-                          isFocused && "bg-blue-50 text-blue-700",
-                          isSelected && "bg-blue-100 text-blue-800 font-medium",
+                          "hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-blue-700 dark:hover:text-blue-300",
+                          isFocused && "bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300",
+                          isSelected && "bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-200 font-medium",
                           option.disabled &&
-                            "cursor-not-allowed opacity-50 bg-gray-50",
-                          "border-b border-gray-50 last:border-b-0",
+                            "cursor-not-allowed opacity-50 bg-gray-50 dark:bg-slate-800/40",
+                          "border-b border-gray-50 dark:border-slate-800/40 last:border-b-0",
                           optionClassName
                         )}
                         onClick={() =>
@@ -330,19 +330,19 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                             <div
                               className={cn(
                                 "font-medium leading-tight",
-                                isSelected && "text-blue-800"
+                                isSelected && "text-blue-850 dark:text-blue-200"
                               )}
                             >
                               {option.label}
                             </div>
                             {option.description && (
-                              <div className="text-xs text-gray-500 mt-1 leading-relaxed">
+                              <div className="text-xs text-gray-500 dark:text-slate-400 mt-1 leading-relaxed">
                                 {option.description}
                               </div>
                             )}
                           </div>
                           {isSelected && (
-                            <Check className="h-4 w-4 ml-3 text-blue-600 flex-shrink-0" />
+                            <Check className="h-4 w-4 ml-3 text-blue-600 dark:text-blue-400 flex-shrink-0" />
                           )}
                         </div>
                       </div>
@@ -360,7 +360,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
             <p
               className={cn(
                 "text-xs leading-relaxed",
-                error ? "text-red-600 font-medium" : "text-gray-500"
+                error ? "text-red-650 dark:text-red-400 font-medium" : "text-gray-500 dark:text-slate-400"
               )}
             >
               {error ? (

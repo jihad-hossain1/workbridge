@@ -37,10 +37,10 @@ export const NotificationHeader = ({ refetch }: NotificationHeaderProps) => {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between px-2">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-800">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
           Inbox Notifications
         </h1>
-        <p className="text-sm text-slate-500 mt-0.5">
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
           Monitor real-time workspace mentions, role modifications, and
           assignment updates.
         </p>
@@ -49,12 +49,12 @@ export const NotificationHeader = ({ refetch }: NotificationHeaderProps) => {
         <button
           onClick={markAllRead}
           disabled={isSubmitting}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-white border border-slate-200 text-slate-700 rounded-lg shadow-sm hover:bg-slate-50 disabled:opacity-50 transition-all self-start sm:self-auto"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 rounded-lg shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50 transition-all self-start sm:self-auto"
         >
           {isSubmitting ? (
             <Loader className="h-3 w-3 animate-spin" />
           ) : (
-            <CheckCheck className="h-3.5 w-3.5 text-blue-600" />
+            <CheckCheck className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
           )}
           Mark all as read
         </button>

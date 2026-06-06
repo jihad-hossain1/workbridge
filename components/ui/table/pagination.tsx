@@ -56,16 +56,16 @@ export const Pagination = ({
   const pages = generatePagination();
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-4 py-3 shadow-sm">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3 shadow-sm text-slate-850 dark:text-slate-200">
       {/* Page size selector + info */}
-      <div className="flex items-center gap-3 text-xs text-slate-500">
+      <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
         <select
-          className="rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs focus:outline-none focus:border-blue-200 focus:ring-1 focus:ring-blue-200"
+          className="rounded-md border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-2 py-1.5 text-xs text-slate-700 dark:text-slate-200 focus:outline-none focus:border-blue-200 focus:ring-1 focus:ring-blue-200 dark:focus:ring-blue-600/45"
           value={pageSize?.toString()}
           onChange={(e) => onPageSizeChange?.(Number(e.target.value))}
         >
           {pageSizeOptions.map((option) => (
-            <option key={option.value} value={option.value}>
+            <option key={option.value} value={option.value} className="dark:bg-slate-900 text-slate-700 dark:text-slate-200">
               {option.text}
             </option>
           ))}
@@ -114,7 +114,7 @@ export const Pagination = ({
         </div>
 
         {/* Mobile page indicator */}
-        <span className="sm:hidden text-xs font-medium text-slate-600 px-2">
+        <span className="sm:hidden text-xs font-medium text-slate-600 dark:text-slate-400 px-2">
           {currentPage} / {totalPage}
         </span>
 

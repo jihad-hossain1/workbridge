@@ -44,8 +44,8 @@ export const Form = (props: IProps) => {
 
   return (
     <div className="">
-      <div className="flex justify-between items-center px-5 py-4 border-b border-slate-100 bg-slate-50">
-        <h3 className="font-semibold text-slate-800 text-sm flex items-center gap-1.5">
+      <div className="flex justify-between items-center px-5 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900">
+        <h3 className="font-semibold text-slate-800 dark:text-slate-200 text-sm flex items-center gap-1.5">
           <FolderKanban className="h-4 w-4 text-blue-600" />
           Establish New Project
         </h3>
@@ -55,14 +55,14 @@ export const Form = (props: IProps) => {
         className="p-5 space-y-4"
       >
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
             Project Name *
           </label>
           <input
             type="text"
             placeholder="e.g. Sales Integration Suite"
             {...regCreate("name", { required: "Project name is required" })}
-            className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-550"
+            className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-550 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500"
           />
           {createErrors.name && (
             <p className="text-red-500 text-[10px] mt-1">
@@ -73,62 +73,52 @@ export const Form = (props: IProps) => {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
               Project Code (Optional)
             </label>
             <input
               type="text"
               placeholder="e.g. SIS"
               {...regCreate("code")}
-              className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-550"
+              className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-550 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
               Start Date
             </label>
             <input
               type="date"
               {...regCreate("startDate")}
-              className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none"
+              className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 [color-scheme:light] dark:[color-scheme:dark]"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
             End Date
           </label>
           <input
             type="date"
             {...regCreate("endDate")}
-            className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none"
+            className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 [color-scheme:light] dark:[color-scheme:dark]"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
             Description
           </label>
           <textarea
             rows={3}
             placeholder="Summarize the core goals and repository bounds..."
             {...regCreate("description")}
-            className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none"
+            className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500"
           />
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
-          <button
-            type="button"
-            onClick={() => {
-              //   setIsCreateOpen(false);
-              resetCreate();
-            }}
-            className="px-4 py-2 text-xs font-semibold border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50"
-          >
-            Cancel
-          </button>
+        <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
           <button
             type="submit"
             disabled={isSubmitting}

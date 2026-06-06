@@ -20,14 +20,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         return (
             <div className="w-full">
                 {label && (
-                    <label className="block mb-2 text-sm font-medium text-foreground" htmlFor={props.id || label}>
+                    <label className="block mb-2 text-sm font-medium text-foreground dark:text-slate-350" htmlFor={props.id || label}>
                         {label}
                     </label>
                 )}
 
                 <textarea
                     className={clsx(
-                        'block w-full rounded-lg border border-input bg-background p-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary focus:outline-none transition-colors',
+                        'block w-full rounded-lg border border-input dark:border-slate-800 bg-background dark:bg-slate-950 p-2.5 text-sm text-foreground dark:text-slate-200 placeholder:text-muted-foreground dark:placeholder:text-slate-500 focus:border-primary focus:ring-primary focus:outline-none transition-colors',
                         resizeClass,
                         error && 'border-red-500 focus:border-red-500 focus:ring-red-500',
                         className
@@ -38,11 +38,11 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
                 />
                 
                 {error && (
-                    <p className="mt-1 text-sm text-red-600">{error}</p>
+                    <p className="mt-1 text-sm text-red-650 dark:text-red-400">{error}</p>
                 )}
                 
                 {helperText && !error && (
-                    <p className="mt-1 text-sm text-muted-foreground">{helperText}</p>
+                    <p className="mt-1 text-sm text-muted-foreground dark:text-slate-450">{helperText}</p>
                 )}
             </div>
         )

@@ -5,12 +5,12 @@ import { Plus } from "lucide-react";
 
 export default function DashboardPage() {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-gray-50 py-2">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-transparent py-2">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-855 bg-gray-50">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
           Console Dashboard
         </h1>
-        <p className="text-sm text-slate-550 mt-0.5 bg-gray-50">
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
           Monitor real-time task completion, project statuses, and workload distribution.
         </p>
       </div>
