@@ -27,7 +27,11 @@ export const NotificationList = ({
   error,
   updateNotifications,
 }: NotificationListProps) => {
+  const [loadingIds, setLoadingIds] = React.useState<Record<string, boolean>>({});
+
   const markRead = async (id: string) => {
+    if (loadingIds[id]) return;
+    setLoadingIds((prev) => ({ ...prev, [id]: true }));
     try {
       const res = await fetcher.patch<{ success: boolean }>(
         notification_api.mark_read_patch(),
@@ -40,6 +44,12 @@ export const NotificationList = ({
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoadingIds((prev) => {
+        const next = { ...prev };
+        delete next[id];
+        return next;
+      });
     }
   };
 
@@ -80,70 +90,90 @@ export const NotificationList = ({
 
   return (
     <div className="bg-white border border-slate-100 rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.01)] overflow-hidden divide-y divide-slate-100">
-      {dataList.map((notif) => (
-        <div
-          key={notif.id}
-          onClick={() => !notif.isRead && markRead(notif.id)}
-          className={`p-5 flex items-start gap-4 transition-colors relative cursor-pointer group ${
-            notif.isRead ? "bg-white" : "bg-blue-50/20 hover:bg-blue-55/30"
-          }`}
-        >
-          {/* Unread indicator */}
-          {!notif.isRead && (
-            <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-600" />
-          )}
-
-          {/* Icon */}
+      {dataList.map((notif) => {
+        const isNotifLoading = !!loadingIds[notif.id];
+        return (
           <div
-            className={`p-2.5 rounded-lg flex-shrink-0 flex items-center justify-center ${
+            key={notif.id}
+            onClick={() => !notif.isRead && !isNotifLoading && markRead(notif.id)}
+            className={`p-5 flex items-start gap-4 transition-all relative group ${
               notif.isRead
-                ? "bg-slate-50 text-slate-400 border border-slate-100"
-                : "bg-blue-50 text-blue-600 border border-blue-100"
+                ? "bg-white"
+                : isNotifLoading
+                ? "bg-blue-50/10 cursor-wait opacity-75 pointer-events-none"
+                : "bg-blue-50/20 hover:bg-blue-55/30 cursor-pointer"
             }`}
           >
-            {notif.isRead ? (
-              <MailOpen className="h-4 w-4" />
-            ) : (
-              <Bell className="h-4 w-4 animate-swing" />
+            {/* Unread indicator */}
+            {!notif.isRead && (
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-600" />
+            )}
+
+            {/* Icon */}
+            <div
+              className={`p-2.5 rounded-lg flex-shrink-0 flex items-center justify-center transition-colors ${
+                notif.isRead
+                  ? "bg-slate-50 text-slate-400 border border-slate-100"
+                  : isNotifLoading
+                  ? "bg-blue-50/50 text-blue-450 border border-blue-100"
+                  : "bg-blue-50 text-blue-600 border border-blue-100"
+              }`}
+            >
+              {isNotifLoading ? (
+                <Loader className="h-4 w-4 animate-spin text-blue-500" />
+              ) : notif.isRead ? (
+                <MailOpen className="h-4 w-4" />
+              ) : (
+                <Bell className="h-4 w-4 animate-swing" />
+              )}
+            </div>
+
+            {/* Body */}
+            <div className="space-y-1 min-w-0 flex-1">
+              <div className="flex items-center justify-between gap-2">
+                <h4 className="text-xs font-semibold text-slate-800 truncate">
+                  {notif.title}
+                </h4>
+                <span className="text-[9px] text-slate-400 font-medium flex items-center gap-1 flex-shrink-0">
+                  <Clock className="h-3 w-3" />
+                  {new Date(notif.createdAt).toLocaleDateString([], {
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </span>
+              </div>
+              <p className="text-xs text-slate-550 leading-relaxed font-normal">
+                {notif.message}
+              </p>
+            </div>
+
+            {/* Action */}
+            {!notif.isRead && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!isNotifLoading) markRead(notif.id);
+                }}
+                disabled={isNotifLoading}
+                title="Mark as read"
+                className={`p-1 text-slate-400 hover:text-blue-600 rounded hover:bg-slate-50 transition-all flex-shrink-0 ${
+                  isNotifLoading
+                    ? "opacity-100 cursor-wait text-blue-500"
+                    : "opacity-0 group-hover:opacity-100"
+                }`}
+              >
+                {isNotifLoading ? (
+                  <Loader className="h-4 w-4 animate-spin" />
+                ) : (
+                  <CheckCircle className="h-4 w-4" />
+                )}
+              </button>
             )}
           </div>
-
-          {/* Body */}
-          <div className="space-y-1 min-w-0 flex-1">
-            <div className="flex items-center justify-between gap-2">
-              <h4 className="text-xs font-semibold text-slate-800 truncate">
-                {notif.title}
-              </h4>
-              <span className="text-[9px] text-slate-400 font-medium flex items-center gap-1 flex-shrink-0">
-                <Clock className="h-3 w-3" />
-                {new Date(notif.createdAt).toLocaleDateString([], {
-                  month: "short",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </span>
-            </div>
-            <p className="text-xs text-slate-550 leading-relaxed font-normal">
-              {notif.message}
-            </p>
-          </div>
-
-          {/* Action */}
-          {!notif.isRead && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                markRead(notif.id);
-              }}
-              title="Mark as read"
-              className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-blue-600 rounded hover:bg-slate-50 transition-all flex-shrink-0"
-            >
-              <CheckCircle className="h-4 w-4" />
-            </button>
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
