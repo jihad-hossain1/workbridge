@@ -3,6 +3,7 @@ import { ServerAuth } from "@/lib/auth/ServerAuth";
 import { prisma } from "@/lib/prisma";
 import { successResponse, errorResponse } from "@/lib/api-response";
 import { activityService } from "@/services/activity.service";
+import { notificationService } from "@/services/notify.service";
 import { z } from "zod";
 
 const UpdateTaskSchema = z.object({
@@ -232,6 +233,16 @@ export async function PUT(
         task.projectId,
         user.userId,
       );
+      // Notify project members
+      const memberUserIds = task.project.members
+        .map((m) => m.userId)
+        .filter((uid) => uid !== user.userId);
+      await notificationService.notifyTaskCompleted(
+        memberUserIds,
+        updatedTask.title,
+        task.project.name,
+        userName,
+      );
     }
     // 2. Status change (non-completed)
     else if (updates.status && updates.status !== task.status) {
@@ -258,6 +269,22 @@ export async function PUT(
           user.userId,
           assigneeName,
         );
+
+        if (task.assigneeId) {
+          // Reassignment
+          await notificationService.notifyTaskReassigned(
+            updates.assigneeId,
+            updatedTask.title,
+            task.project.name,
+          );
+        } else {
+          // Initial assignment
+          await notificationService.notifyTaskAssigned(
+            updates.assigneeId,
+            updatedTask.title,
+            task.project.name,
+          );
+        }
       } else {
         await activityService.logTaskUpdated(
           task.id,
