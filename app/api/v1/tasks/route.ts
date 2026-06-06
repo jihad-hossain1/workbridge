@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { successResponse, errorResponse } from "@/lib/api-response";
 import { activityService } from "@/services/activity.service";
 import { z } from "zod";
+import { notificationService } from "@/services/notify.service";
 
 const CreateTaskSchema = z.object({
   projectId: z.string().min(1, "projectId is required"),
@@ -251,6 +252,11 @@ export async function POST(req: NextRequest) {
         projectId,
         user.userId,
         assigneeName,
+      );
+      await notificationService.notifyTaskAssigned(
+        assigneeId,
+        newTask.title,
+        project.name,
       );
     }
 

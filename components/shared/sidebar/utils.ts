@@ -38,7 +38,7 @@ export const sideMenus = [
   },
   {
     name: "Notifications",
-    href: "/main/notifications",
+    href: "/main/notify",
     icon: Bell,
     color: "#ec4899", // Pink 500
     isSubMenu: false,

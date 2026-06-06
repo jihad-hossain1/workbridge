@@ -7,6 +7,7 @@ import {
 import Sidebar from "@/components/shared/sidebar/Sidebar";
 import { TopBar } from "@/components/shared/topbar/Topbar";
 import { cn } from "@/utils/cn";
+import { usePathname } from "next/navigation";
 
 type IProps = {
   children: React.ReactNode;
@@ -19,7 +20,8 @@ type IProps = {
 const DashboardContent = (props: IProps) => {
   const { children, stats, charts, progress, activities } = props;
   const { isCollapsed } = useSidebar();
-  const isDashboard = !!stats;
+  const pathname = usePathname();
+  const isDashboard = pathname === "/main" || pathname === "/main/";
 
   return (
     <div className="flex h-screen bg-gray-50">

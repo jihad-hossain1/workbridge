@@ -40,3 +40,8 @@ export const task_api = {
 export const analytics_api = {
   dashboard_get: () => `${baseUrl}/dashboard/analytics`,
 };
+
+export const notification_api = {
+  list_get: () => `${baseUrl}/notifications`,
+  mark_read_patch: () => `${baseUrl}/notifications`,
+};
