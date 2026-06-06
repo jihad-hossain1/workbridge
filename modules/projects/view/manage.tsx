@@ -13,8 +13,16 @@ import {
   Shield,
   UserPlus,
   Users,
+  X,
 } from "lucide-react";
 import { TProjectDetail } from "./type";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+} from "@/components/ui/dialog/dialog";
+import { MemberAdd } from "./components/member-add";
+import { useState } from "react";
 
 const COLORS = [
   "#3b82f6",
@@ -27,12 +35,15 @@ const COLORS = [
 
 export const Manage = (props: IProps) => {
   const { id } = props;
-  const { data: project, isLoading } = useSwrFetch<TProjectDetail>(
+  const { data, isLoading, mutate } = useSwrFetch<{ data: TProjectDetail }>(
     project_api.view_get(id),
   );
 
+  const project = data?.data;
   if (isLoading) return <LoadState />;
   if (!project) return <NoProject />;
+
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -68,19 +79,27 @@ export const Manage = (props: IProps) => {
 
           <div className="flex items-center gap-2">
             <a
-              // href={`/main/tasks?projectId=${project.id}`}
+              href={`/main/tasks?projectId=${project?.id}`}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-white border border-slate-200 text-slate-700 rounded-lg shadow-sm hover:bg-slate-50 transition-all"
             >
               <FileText className="h-3.5 w-3.5" />
               View Tasks Board
             </a>
             <button
-              // onClick={() => setIsAddingMember(true)}
+              onClick={() => setOpen(true)}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all"
             >
               <UserPlus className="h-3.5 w-3.5" />
               Add Member
             </button>
+            <Dialog onOpenChange={setOpen} open={open}>
+              <DialogContent className="max-w-xl mx-auto p-2">
+                <DialogClose className="absolute top-2 right-2">
+                  <X className="h-4 w-4 text-red-500" />
+                </DialogClose>
+                <MemberAdd projectId={id} refetch={mutate} />
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>
@@ -155,7 +174,7 @@ export const Manage = (props: IProps) => {
                 Recent Task Actions
               </h3>
               <a
-                // href={`/main/tasks?projectId=${project?.id}`}
+                href={`/main/tasks?projectId=${project?.id}`}
                 className="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-0.5"
               >
                 Go to Tasks
