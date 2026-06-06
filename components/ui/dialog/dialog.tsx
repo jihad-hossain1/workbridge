@@ -97,7 +97,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
           ref={contentRef}
           onClick={handleContentClick}
           onMouseDown={handleContentClick}
-          className={`fixed left-[50%] top-[50%] z-50 w-[95vw] translate-x-[-50%] translate-y-[-50%] gap-4 border border-gray-200 bg-white p-6 shadow-lg duration-200 sm:w-full sm:rounded-lg ${className}`}
+          className={`fixed left-[50%] top-[50%] z-50 w-[95vw] translate-x-[-50%] translate-y-[-50%] gap-4 border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 p-6 shadow-lg duration-200 sm:w-full sm:rounded-lg ${className}`}
           {...props}
         >
           {children}

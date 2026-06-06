@@ -89,14 +89,14 @@ export const RegisterForm = () => {
 
   return (
     <div>
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-cyan-700 bg-clip-text text-transparent mb-2">
+      <div className="text-center mb-8 bg-transparent">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-cyan-700 dark:from-slate-100 dark:to-cyan-400 bg-clip-text text-transparent mb-2">
           Create Account
         </h1>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {errorMessage && (
-          <div className="flex items-center gap-3 p-4 rounded-lg border-l-4 border-red-500 bg-red-50 shadow-sm animate-scale-in">
+          <div className="flex items-center gap-3 p-4 rounded-lg border-l-4 border-red-500 bg-red-50 dark:bg-red-950/20 shadow-sm animate-scale-in">
             <svg
               className="h-5 w-5 text-red-500 flex-shrink-0"
               viewBox="0 0 24 24"
@@ -110,12 +110,12 @@ export const RegisterForm = () => {
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
-            <p className="text-red-700 font-medium text-sm">{errorMessage}</p>
+            <p className="text-red-750 dark:text-red-400 font-medium text-sm">{errorMessage}</p>
           </div>
         )}
 
         {successMessage && (
-          <div className="flex items-center gap-3 p-4 rounded-lg border-l-4 border-green-500 bg-green-50 shadow-sm animate-scale-in">
+          <div className="flex items-center gap-3 p-4 rounded-lg border-l-4 border-green-500 bg-green-50 dark:bg-green-950/20 shadow-sm animate-scale-in">
             <svg
               className="h-5 w-5 text-green-500 flex-shrink-0"
               viewBox="0 0 24 24"
@@ -128,7 +128,7 @@ export const RegisterForm = () => {
               <path d="M9 12l2 2 4-4" />
               <circle cx="12" cy="12" r="10" />
             </svg>
-            <p className="text-green-700 font-medium text-sm">
+            <p className="text-green-750 dark:text-green-400 font-medium text-sm">
               {successMessage}
             </p>
           </div>
@@ -202,9 +202,9 @@ export const RegisterForm = () => {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-3 top-[70%] -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
             >
-              {showPassword ? <icons.eyeOff /> : <icons.eye />}
+              {showPassword ? <icons.eyeOff className="h-4 w-4" /> : <icons.eye className="h-4 w-4" />}
             </button>
           </div>
           {errors.password && (
@@ -227,9 +227,9 @@ export const RegisterForm = () => {
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-3 top-[70%] -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
             >
-              {showConfirmPassword ? <icons.eyeOff /> : <icons.eye />}
+              {showConfirmPassword ? <icons.eyeOff className="h-4 w-4" /> : <icons.eye className="h-4 w-4" />}
             </button>
           </div>
           {errors.confirmPassword && (
@@ -239,18 +239,18 @@ export const RegisterForm = () => {
           )}
         </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center bg-transparent">
           <label className="flex items-center group cursor-pointer">
             <input
               type="checkbox"
-              className="rounded border-slate-300 text-cyan-600 focus:ring-cyan-500 focus:ring-2"
+              className="rounded border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-cyan-600 focus:ring-cyan-500 focus:ring-2"
               required
             />
-            <span className="ml-2 text-sm text-slate-600 group-hover:text-slate-800 transition-colors">
+            <span className="ml-2 text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 transition-colors">
               I agree to the{" "}
               <a
                 href="#"
-                className="text-cyan-600 hover:text-cyan-800 font-medium transition-colors"
+                className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 font-medium transition-colors"
               >
                 Terms and Conditions
               </a>
@@ -275,19 +275,19 @@ export const RegisterForm = () => {
           )}
         </Button>
       </form>
-      <div className="mt-6 text-center">
-        <div className="text-sm text-slate-600 mb-4">
+      <div className="mt-6 text-center bg-transparent">
+        <div className="text-sm text-slate-600 dark:text-slate-400 mb-4">
           Already have an account?{" "}
           <a
             href="/login"
-            className="text-cyan-600 hover:text-cyan-800 font-semibold transition-colors"
+            className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-800 dark:hover:text-cyan-300 font-semibold transition-colors"
           >
             Sign In
           </a>
         </div>
         <a
           href="/"
-          className="inline-flex items-center text-slate-500 hover:text-cyan-600 transition-all duration-200 text-sm font-medium hover:scale-105 active:scale-95"
+          className="inline-flex items-center text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all duration-200 text-sm font-medium hover:scale-105 active:scale-95"
         >
           <svg
             className="w-4 h-4 mr-2"

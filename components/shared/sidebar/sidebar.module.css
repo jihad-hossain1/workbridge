@@ -158,3 +158,68 @@
   border-radius: 8px;
   padding: 10px;
 }
+
+/* Dark Mode Overrides */
+:global(.dark) .sidebar {
+  background: #0f172a;
+  border-right-color: #1e293b;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+:global(.dark) .header {
+  border-bottom-color: #1e293b;
+}
+
+:global(.dark) .headerText h4 {
+  color: #f8fafc !important;
+}
+
+:global(.dark) .headerText p {
+  color: #94a3b8 !important;
+}
+
+:global(.dark) .header button {
+  border-color: #1e293b;
+  color: #94a3b8;
+}
+
+:global(.dark) .header button:hover {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+:global(.dark) .navItem {
+  color: #94a3b8;
+}
+
+:global(.dark) .navItemActive {
+  background-color: #1e293b;
+  color: #60a5fa;
+  box-shadow: inset 3px 0 0 #3b82f6;
+}
+
+:global(.dark) .navItem:hover:not(.navItemActive) {
+  background-color: rgba(30, 41, 59, 0.5);
+  color: #f8fafc;
+}
+
+:global(.dark) .sectionLabel {
+  color: #64748b;
+}
+
+:global(.dark) .footer {
+  border-top-color: #1e293b;
+}
+
+:global(.dark) .footerCard {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+:global(.dark) .footerCard p:first-child {
+  color: #e2e8f0 !important;
+}
+
+:global(.dark) .footerCard p:last-child {
+  color: #34d399 !important;
+}

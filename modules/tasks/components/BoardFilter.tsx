@@ -27,7 +27,7 @@ export const BoardFilter = () => {
   }, [filter.query]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-white border border-slate-100 p-4 rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.015)]">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-4 rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.015)]">
       {/* Search */}
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -36,7 +36,7 @@ export const BoardFilter = () => {
           placeholder="Search task title..."
           value={search}
           onChange={(e) => handleSearchChange(e.target.value)}
-          className="w-full pl-9 pr-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-slate-55/30 hover:bg-slate-50 transition-colors"
+          className="w-full pl-9 pr-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors text-slate-800 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500"
         />
       </div>
 
@@ -44,11 +44,11 @@ export const BoardFilter = () => {
       <select
         value={filter.projectId || ""}
         onChange={(e) => updateFilter({ projectId: e.target.value })}
-        className="px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none bg-white font-medium text-slate-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+        className="px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none bg-white dark:bg-slate-950 font-medium text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
       >
-        <option value="">All Projects</option>
+        <option value="" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">All Projects</option>
         {projects.map((p) => (
-          <option key={p.id} value={p.id}>
+          <option key={p.id} value={p.id} className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">
             {p.name}
           </option>
         ))}
@@ -58,19 +58,19 @@ export const BoardFilter = () => {
       <select
         value={filter.priority || ""}
         onChange={(e) => updateFilter({ priority: e.target.value })}
-        className="px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none bg-white font-medium text-slate-700 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+        className="px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none bg-white dark:bg-slate-950 font-medium text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
       >
-        <option value="">All Priorities</option>
-        <option value="LOW">Low</option>
-        <option value="MEDIUM">Medium</option>
-        <option value="HIGH">High</option>
-        <option value="URGENT">Urgent</option>
+        <option value="" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">All Priorities</option>
+        <option value="LOW" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">Low</option>
+        <option value="MEDIUM" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">Medium</option>
+        <option value="HIGH" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">High</option>
+        <option value="URGENT" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">Urgent</option>
       </select>
 
       {/* Clear Filters */}
       <button
         onClick={resetFilter}
-        className="text-xs font-semibold text-blue-600 bg-blue-50 rounded-lg py-2 hover:bg-blue-100 transition-all active:scale-95 duration-150"
+        className="text-xs font-semibold text-blue-600 dark:text-blue-450 bg-blue-50 dark:bg-blue-950/40 rounded-lg py-2 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-all active:scale-95 duration-150"
       >
         Clear Filters
       </button>

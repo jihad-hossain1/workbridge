@@ -8,11 +8,14 @@ import { signout } from "@/modules/auth/actions/authActions";
 import { useAuthStore } from "@/hooks/useAuthStore";
 import { useRouter } from "next/navigation";
 import { cn } from "@/utils/cn";
+import { useTheme } from "../context/ThemeContext";
+import { Sun, Moon } from "lucide-react";
 
 export const TopBar = () => {
   const { isCollapsed } = useSidebar();
   const { logoutUser } = useAuthStore();
   const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
 
   const [isLoggingOut, setIsLoggingOut] = React.useState(false);
 
@@ -45,7 +48,7 @@ export const TopBar = () => {
   return (
     <div
       className={cn(
-        "xl:bg-white xl:border-b xl:border-gray-200 h-14 2xl:h-16 fixed right-0 top-0 z-30 transition-[left] duration-300 ease-in-out xl:shadow-sm",
+        "xl:bg-white xl:dark:bg-slate-900 xl:border-b xl:border-gray-200 xl:dark:border-slate-800 h-14 2xl:h-16 fixed right-0 top-0 z-30 transition-[left] duration-300 ease-in-out xl:shadow-sm",
         isCollapsed ? "lg:left-[80px]" : "lg:left-[260px]"
       )}
     >
@@ -72,18 +75,31 @@ export const TopBar = () => {
 
         {/* Right Side Icons */}
         <div className="flex items-center gap-4">
-          <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-all duration-200 hover:scale-105">
-            <icons.bell className="h-5 w-5 text-gray-600" />
-            <span className="absolute top-1 right-1 h-2.5 w-2.5 bg-red-500 rounded-full ring-2 ring-white"></span>
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-200 hover:scale-105 text-gray-600 dark:text-slate-400 flex items-center justify-center"
+          >
+            {theme === "dark" ? (
+              <Sun className="h-5 w-5 text-amber-500 fill-amber-500/10" />
+            ) : (
+              <Moon className="h-5 w-5 text-slate-700" />
+            )}
+          </button>
+
+          <button className="relative p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-200 hover:scale-105">
+            <icons.bell className="h-5 w-5 text-gray-600 dark:text-slate-400" />
+            <span className="absolute top-1 right-1 h-2.5 w-2.5 bg-red-500 rounded-full ring-2 ring-white dark:ring-slate-900"></span>
           </button>
 
           <DropdownMenu
             trigger={
-              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg transition-all duration-200 hover:scale-105">
-                <div className="2xl:h-8 2xl:w-8 h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center">
-                  <icons.user className="h-4 w-4 2xl:h-5 2xl:w-5 text-gray-600" />
+              <button className="flex items-center gap-2 p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-all duration-200 hover:scale-105">
+                <div className="2xl:h-8 2xl:w-8 h-6 w-6 rounded-full bg-gray-200 dark:bg-slate-800 flex items-center justify-center">
+                  <icons.user className="h-4 w-4 2xl:h-5 2xl:w-5 text-gray-600 dark:text-slate-450" />
                 </div>
-                <span className="text-xs 2xl:text-sm font-normal 2xl:font-medium text-gray-700 hidden sm:block">
+                <span className="text-xs 2xl:text-sm font-normal 2xl:font-medium text-gray-700 dark:text-slate-300 hidden sm:block">
                   Profile
                 </span>
               </button>

@@ -6,14 +6,14 @@ export default function StatsLoading() {
       {[...Array(4)].map((_, i) => (
         <div
           key={i}
-          className="bg-white border border-slate-100 rounded-xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-3 animate-pulse"
+          className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-3 animate-pulse"
         >
           <div className="flex justify-between items-center">
-            <div className="h-3 w-24 bg-slate-200 rounded" />
-            <div className="h-8 w-8 bg-slate-100 rounded-lg" />
+            <div className="h-3 w-24 bg-slate-200 dark:bg-slate-800 rounded" />
+            <div className="h-8 w-8 bg-slate-100 dark:bg-slate-800/50 rounded-lg" />
           </div>
-          <div className="h-6 w-16 bg-slate-200 rounded" />
-          <div className="h-3 w-32 bg-slate-100 rounded" />
+          <div className="h-6 w-16 bg-slate-200 dark:bg-slate-800 rounded" />
+          <div className="h-3 w-32 bg-slate-100 dark:bg-slate-800/50 rounded" />
         </div>
       ))}
     </div>

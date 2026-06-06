@@ -3,7 +3,7 @@ import { Form } from "@/modules/auth/components/login/form";
 
 const WorkBridgeLoginPage = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center max-sm:p-6  lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 flex flex-col justify-center max-sm:p-6 lg:px-8 transition-colors duration-200">
       {/* Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
@@ -11,33 +11,33 @@ const WorkBridgeLoginPage = () => {
             <span className="text-white font-bold text-xl">WorkBridge</span>
           </div>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-slate-100">
           Task Collaboration Platform
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="mt-2 text-center text-sm text-gray-600 dark:text-slate-400">
           Sign in to access your enterprise dashboard
         </p>
       </div>
 
       {/* Login Form */}
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-xl rounded-lg sm:px-10 border border-gray-200">
+        <div className="bg-white dark:bg-slate-900 py-8 px-4 shadow-xl rounded-lg sm:px-10 border border-gray-200 dark:border-slate-800">
           <Form />
           {/* Quick Access Links */}
         </div>
 
         {/* Footer Links */}
-        <div className="mt-6 text-center text-sm text-gray-500">
+        <div className="mt-6 text-center text-sm text-gray-500 dark:text-slate-450">
           <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center">
-            <Link href="#" className="hover:text-gray-700 transition-colors">
+            <Link href="#" className="hover:text-gray-700 dark:hover:text-slate-200 transition-colors">
               Privacy Policy
             </Link>
             <span className="hidden sm:inline">•</span>
-            <Link href="#" className="hover:text-gray-700 transition-colors">
+            <Link href="#" className="hover:text-gray-700 dark:hover:text-slate-200 transition-colors">
               Terms of Service
             </Link>
             <span className="hidden sm:inline">•</span>
-            <Link href="#" className="hover:text-gray-700 transition-colors">
+            <Link href="#" className="hover:text-gray-700 dark:hover:text-slate-200 transition-colors">
               Security
             </Link>
           </div>

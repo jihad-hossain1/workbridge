@@ -28,51 +28,51 @@ const ProjectSkeleton = () => {
       {Array.from({ length: 6 }).map((_, index) => (
         <div
           key={index}
-          className="bg-white border border-slate-100 rounded-xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.02)] flex flex-col justify-between"
+          className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.02)] flex flex-col justify-between"
         >
           <div>
             {/* Top info skeleton */}
             <div className="flex items-center gap-2">
-              <div className="h-4 w-12 animate-pulse bg-slate-100 rounded" />
-              <div className="h-4 w-16 animate-pulse bg-slate-100 rounded" />
+              <div className="h-4 w-12 animate-pulse bg-slate-100 dark:bg-slate-800 rounded" />
+              <div className="h-4 w-16 animate-pulse bg-slate-100 dark:bg-slate-800 rounded" />
             </div>
 
             {/* Name skeleton */}
-            <div className="h-5 w-3/4 animate-pulse bg-slate-200 rounded mt-3" />
+            <div className="h-5 w-3/4 animate-pulse bg-slate-200 dark:bg-slate-700 rounded mt-3" />
 
             {/* Desc skeleton */}
             <div className="space-y-1.5 mt-2.5">
-              <div className="h-3 w-full animate-pulse bg-slate-100 rounded" />
-              <div className="h-3 w-5/6 animate-pulse bg-slate-100 rounded" />
+              <div className="h-3 w-full animate-pulse bg-slate-100 dark:bg-slate-800 rounded" />
+              <div className="h-3 w-5/6 animate-pulse bg-slate-100 dark:bg-slate-800 rounded" />
             </div>
           </div>
 
           {/* Progress bar skeleton */}
           <div className="mt-5 space-y-2">
             <div className="flex justify-between items-center">
-              <div className="h-3 w-12 animate-pulse bg-slate-100 rounded" />
-              <div className="h-3 w-8 animate-pulse bg-slate-100 rounded" />
+              <div className="h-3 w-12 animate-pulse bg-slate-100 dark:bg-slate-800 rounded" />
+              <div className="h-3 w-8 animate-pulse bg-slate-100 dark:bg-slate-800 rounded" />
             </div>
-            <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-              <div className="h-full w-2/3 bg-slate-200 rounded-full animate-pulse" />
+            <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div className="h-full w-2/3 bg-slate-200 dark:bg-slate-700 rounded-full animate-pulse" />
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="h-3.5 w-3.5 rounded-full animate-pulse bg-slate-200" />
-              <div className="h-3 w-28 animate-pulse bg-slate-100 rounded" />
+              <div className="h-3.5 w-3.5 rounded-full animate-pulse bg-slate-200 dark:bg-slate-700" />
+              <div className="h-3 w-28 animate-pulse bg-slate-100 dark:bg-slate-800 rounded" />
             </div>
           </div>
 
           {/* Footer details skeleton */}
-          <div className="border-t border-slate-100 mt-5 pt-4 flex items-center justify-between">
+          <div className="border-t border-slate-100 dark:border-slate-800 mt-5 pt-4 flex items-center justify-between">
             <div className="flex items-center gap-1.5">
-              <div className="h-3.5 w-3.5 rounded animate-pulse bg-slate-200" />
-              <div className="h-3 w-20 animate-pulse bg-slate-100 rounded" />
+              <div className="h-3.5 w-3.5 rounded animate-pulse bg-slate-200 dark:bg-slate-700" />
+              <div className="h-3 w-20 animate-pulse bg-slate-100 dark:bg-slate-800 rounded" />
             </div>
 
             <div className="flex items-center -space-x-1.5 overflow-hidden">
-              <div className="h-6 w-6 rounded-full border border-white bg-slate-200 animate-pulse" />
-              <div className="h-6 w-6 rounded-full border border-white bg-slate-200 animate-pulse" />
-              <div className="h-6 w-6 rounded-full border border-white bg-slate-200 animate-pulse" />
+              <div className="h-6 w-6 rounded-full border border-white dark:border-slate-800 bg-slate-200 dark:bg-slate-700 animate-pulse" />
+              <div className="h-6 w-6 rounded-full border border-white dark:border-slate-800 bg-slate-200 dark:bg-slate-700 animate-pulse" />
+              <div className="h-6 w-6 rounded-full border border-white dark:border-slate-800 bg-slate-200 dark:bg-slate-700 animate-pulse" />
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@ const TableBody = (props: TableProps) => {
         {dataList?.map((project) => (
           <div
             key={project.id}
-            className="group relative bg-white border border-slate-100 rounded-xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between"
+            className="group relative bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between"
           >
             {/* Options Menu */}
             <div className="absolute right-4 top-4 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
@@ -203,13 +203,13 @@ const TableBody = (props: TableProps) => {
                     );
                     if (menu) menu.classList.toggle("hidden");
                   }}
-                  className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-50 rounded"
+                  className="p-1 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded"
                 >
                   <MoreVertical className="h-4 w-4" />
                 </button>
                 <div
                   id={`dropdown-${project.id}`}
-                  className="hidden absolute right-0 mt-1 w-36 bg-white border border-slate-100 rounded-lg shadow-lg py-1 z-10 text-xs text-slate-700"
+                  className="hidden absolute right-0 mt-1 w-36 bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-lg shadow-lg py-1 z-10 text-xs text-slate-700 dark:text-slate-200"
                   onMouseLeave={(e) => e.currentTarget.classList.add("hidden")}
                 >
                   <button
@@ -217,21 +217,21 @@ const TableBody = (props: TableProps) => {
                       setSelectedProject(project);
                       setOpen(true);
                     }}
-                    className="w-full text-left px-3 py-1.5 hover:bg-slate-50 flex items-center gap-1.5"
+                    className="w-full text-left px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-1.5"
                   >
                     <Edit2 className="h-3 w-3" />
                     Edit Details
                   </button>
                   <button
                     onClick={() => handleArchiveClick(project)}
-                    className="w-full text-left px-3 py-1.5 hover:bg-slate-50 flex items-center gap-1.5"
+                    className="w-full text-left px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-1.5"
                   >
                     <Archive className="h-3 w-3" />
                     {project.status === "ACTIVE" ? "Archive" : "Activate"}
                   </button>
                   <button
                     onClick={() => handleDeleteClick(project)}
-                    className="w-full text-left px-3 py-1.5 hover:bg-rose-50 text-rose-600 flex items-center gap-1.5"
+                    className="w-full text-left px-3 py-1.5 hover:bg-rose-50 dark:hover:bg-rose-950/20 text-rose-600 dark:text-rose-400 flex items-center gap-1.5"
                   >
                     <Trash2 className="h-3 w-3" />
                     Delete Project
@@ -242,15 +242,15 @@ const TableBody = (props: TableProps) => {
 
             <div>
               {/* Top info */}
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded uppercase tracking-wider">
+              <div className="flex items-center gap-2 bg-transparent">
+                <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-1.5 py-0.5 rounded uppercase tracking-wider">
                   {project.code || "PROJ"}
                 </span>
                 <span
                   className={`text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider ${
                     project.status === "ACTIVE"
-                      ? "text-emerald-600 bg-emerald-50"
-                      : "text-slate-500 bg-slate-100"
+                      ? "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40"
+                      : "text-slate-550 dark:text-slate-400 bg-slate-100 dark:bg-slate-800"
                   }`}
                 >
                   {project.status}
@@ -260,34 +260,34 @@ const TableBody = (props: TableProps) => {
               {/* Name and desc */}
               <a
                 href={`/main/projects/view?id=${project.id}`}
-                className="block mt-2.5 hover:text-blue-600 transition-colors"
+                className="block mt-2.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
-                <h3 className="font-semibold text-slate-800 text-base group-hover:text-blue-600 transition-colors">
+                <h3 className="font-semibold text-slate-800 dark:text-slate-200 text-base group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {project.name}
                 </h3>
               </a>
-              <p className="text-xs text-slate-450 mt-1 line-clamp-2 leading-relaxed">
+              <p className="text-xs text-slate-450 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">
                 {project.description || "No description provided."}
               </p>
             </div>
 
             {/* Progress bar */}
-            <div className="mt-5 space-y-1.5">
+            <div className="mt-5 space-y-1.5 bg-transparent">
               <div className="flex justify-between items-center text-[10px]">
-                <span className="text-slate-400 font-semibold uppercase tracking-wider">
+                <span className="text-slate-450 dark:text-slate-400 font-semibold uppercase tracking-wider">
                   Progress
                 </span>
-                <span className="text-slate-650 font-bold">
+                <span className="text-slate-650 dark:text-slate-300 font-bold">
                   {project.progress}%
                 </span>
               </div>
-              <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+              <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-blue-600 rounded-full transition-all duration-550"
                   style={{ width: `${project.progress}%` }}
                 />
               </div>
-              <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium">
+              <div className="flex items-center gap-1.5 text-[10px] text-slate-405 dark:text-slate-400 font-medium">
                 <CheckCircle2 className="h-3 w-3 text-emerald-500" />
                 <span>
                   {project.completedTasksCount}/{project.totalTasksCount} tasks
@@ -297,8 +297,8 @@ const TableBody = (props: TableProps) => {
             </div>
 
             {/* Footer details: dates & members */}
-            <div className="border-t border-slate-100 mt-5 pt-4 flex items-center justify-between">
-              <div className="flex items-center gap-1 text-[10px] text-slate-400">
+            <div className="border-t border-slate-100 dark:border-slate-800 mt-5 pt-4 flex items-center justify-between">
+              <div className="flex items-center gap-1 text-[10px] text-slate-400 dark:text-slate-400">
                 <Calendar className="h-3.5 w-3.5" />
                 <span>
                   {project.startDate
@@ -322,7 +322,7 @@ const TableBody = (props: TableProps) => {
                   <div
                     key={m.user.id}
                     title={`${m.user.firstName} ${m.user.lastName} (${m.role})`}
-                    className={`h-6 w-6 rounded-full border border-white flex items-center justify-center text-[9px] font-bold text-white shadow-sm ring-1 ring-slate-100`}
+                    className={`h-6 w-6 rounded-full border border-white dark:border-slate-900 flex items-center justify-center text-[9px] font-bold text-white shadow-sm ring-1 ring-slate-100 dark:ring-slate-800`}
                     style={{
                       backgroundColor: COLORS[index % COLORS.length],
                     }}
@@ -332,12 +332,12 @@ const TableBody = (props: TableProps) => {
                   </div>
                 ))}
                 {project.members.length > 3 && (
-                  <div className="h-6 w-6 rounded-full bg-slate-100 border border-white flex items-center justify-center text-[8px] font-bold text-slate-500 ring-1 ring-slate-100">
+                  <div className="h-6 w-6 rounded-full bg-slate-100 dark:bg-slate-800 border border-white dark:border-slate-900 flex items-center justify-center text-[8px] font-bold text-slate-500 dark:text-slate-400 ring-1 ring-slate-100 dark:ring-slate-800">
                     +{project.members.length - 3}
                   </div>
                 )}
                 {project.members.length === 0 && (
-                  <span className="text-[10px] text-slate-400 flex items-center gap-0.5">
+                  <span className="text-[10px] text-slate-400 dark:text-slate-500 flex items-center gap-0.5">
                     <Users className="h-3 w-3" />
                     None
                   </span>
@@ -370,16 +370,16 @@ const TableBody = (props: TableProps) => {
           <DialogClose className="absolute right-3 top-3" disabled={isDeleting}>
             <X className="h-4 w-4 text-slate-400 hover:text-slate-650" />
           </DialogClose>
-          <div className="flex flex-col items-center text-center mt-2">
-            <div className="w-12 h-12 bg-rose-50 rounded-full flex items-center justify-center mb-4">
-              <Trash2 className="h-6 w-6 text-rose-600" />
+          <div className="flex flex-col items-center text-center mt-2 bg-transparent">
+            <div className="w-12 h-12 bg-rose-50 dark:bg-rose-950/20 rounded-full flex items-center justify-center mb-4">
+              <Trash2 className="h-6 w-6 text-rose-600 dark:text-rose-455" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
               Delete Project
             </h3>
-            <p className="text-sm text-slate-500 mt-2">
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
               Are you sure you want to delete{" "}
-              <span className="font-semibold text-slate-700">
+              <span className="font-semibold text-slate-700 dark:text-slate-300">
                 "{projectToDelete?.name}"
               </span>
               ? This will remove all associated tasks, comments, and attachments
@@ -424,23 +424,23 @@ const TableBody = (props: TableProps) => {
           >
             <X className="h-4 w-4 text-slate-400 hover:text-slate-650" />
           </DialogClose>
-          <div className="flex flex-col items-center text-center mt-2">
+          <div className="flex flex-col items-center text-center mt-2 bg-transparent">
             <div
-              className={`w-12 h-12 ${projectToArchive?.status === "ACTIVE" ? "bg-amber-50" : "bg-emerald-50"} rounded-full flex items-center justify-center mb-4`}
+              className={`w-12 h-12 ${projectToArchive?.status === "ACTIVE" ? "bg-amber-50 dark:bg-amber-950/20" : "bg-emerald-50 dark:bg-emerald-950/20"} rounded-full flex items-center justify-center mb-4`}
             >
               <Archive
-                className={`h-6 w-6 ${projectToArchive?.status === "ACTIVE" ? "text-amber-600" : "text-emerald-600"}`}
+                className={`h-6 w-6 ${projectToArchive?.status === "ACTIVE" ? "text-amber-600 dark:text-amber-455" : "text-emerald-600 dark:text-emerald-455"}`}
               />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
               {projectToArchive?.status === "ACTIVE"
                 ? "Archive Project"
                 : "Activate Project"}
             </h3>
-            <p className="text-sm text-slate-500 mt-2">
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
               Are you sure you want to{" "}
               {projectToArchive?.status === "ACTIVE" ? "archive" : "activate"}{" "}
-              <span className="font-semibold text-slate-700">
+              <span className="font-semibold text-slate-700 dark:text-slate-300">
                 "{projectToArchive?.name}"
               </span>
               ?{" "}

@@ -61,8 +61,8 @@ export const CreateTaskModal = ({ refetch }: CreateTaskModalProps) => {
 
   return (
     <>
-      <div className="flex justify-between items-center px-5 py-4 border-b border-slate-100 bg-slate-50">
-        <h3 className="font-semibold text-slate-800 text-sm flex items-center gap-1.5">
+      <div className="flex justify-between items-center px-5 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900">
+        <h3 className="font-semibold text-slate-800 dark:text-slate-200 text-sm flex items-center gap-1.5">
           <CheckSquare className="h-4 w-4 text-blue-600" />
           Initialize Work Task
         </h3>
@@ -70,18 +70,18 @@ export const CreateTaskModal = ({ refetch }: CreateTaskModalProps) => {
       <form onSubmit={handleSubmit(onCreateSubmit)} className="p-5 space-y-4">
         {/* Selected Project */}
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
             Select Project *
           </label>
           <select
             {...register("projectId", {
               required: "Project assignment is required",
             })}
-            className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-550 bg-white font-medium text-slate-700"
+            className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-550 bg-white dark:bg-slate-950 font-medium text-slate-700 dark:text-slate-200"
           >
-            <option value="">-- Choose active project --</option>
+            <option value="" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">-- Choose active project --</option>
             {projects.map((p) => (
-              <option key={p.id} value={p.id}>
+              <option key={p.id} value={p.id} className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">
                 {p.name}
               </option>
             ))}
@@ -95,14 +95,14 @@ export const CreateTaskModal = ({ refetch }: CreateTaskModalProps) => {
 
         {/* Title */}
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
             Task Title *
           </label>
           <input
             type="text"
             placeholder="e.g. Integrate auth token validation callback"
             {...register("title", { required: "Task title is required" })}
-            className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-550 font-medium text-slate-800 placeholder:text-slate-400"
+            className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-550 font-medium text-slate-850 dark:text-slate-200 placeholder:text-slate-400 bg-white dark:bg-slate-950"
           />
           {errors.title && (
             <p className="text-red-500 text-[10px] mt-1">
@@ -114,34 +114,34 @@ export const CreateTaskModal = ({ refetch }: CreateTaskModalProps) => {
         {/* Grid 2x2 */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
               Assignee (Optional)
             </label>
             <select
               {...register("assigneeId")}
               disabled={!createProjectId}
-              className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none bg-white font-medium text-slate-700 disabled:bg-slate-50 disabled:cursor-not-allowed"
+              className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none bg-white dark:bg-slate-950 font-medium text-slate-700 dark:text-slate-200 disabled:bg-slate-50 dark:disabled:bg-slate-900 disabled:cursor-not-allowed"
             >
-              <option value="">-- Unassigned --</option>
+              <option value="" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">-- Unassigned --</option>
               {projectMembers.map((m) => (
-                <option key={m.id} value={m.id}>
+                <option key={m.id} value={m.id} className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">
                   {m.firstName} {m.lastName}
                 </option>
               ))}
             </select>
           </div>
           <div>
-            <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
               Priority
             </label>
             <select
               {...register("priority")}
-              className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none bg-white font-medium text-slate-700"
+              className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none bg-white dark:bg-slate-950 font-medium text-slate-700 dark:text-slate-200"
             >
-              <option value="LOW">Low</option>
-              <option value="MEDIUM">Medium</option>
-              <option value="HIGH">High</option>
-              <option value="URGENT">Urgent</option>
+              <option value="LOW" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">Low</option>
+              <option value="MEDIUM" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">Medium</option>
+              <option value="HIGH" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">High</option>
+              <option value="URGENT" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">Urgent</option>
             </select>
           </div>
         </div>
@@ -149,56 +149,46 @@ export const CreateTaskModal = ({ refetch }: CreateTaskModalProps) => {
         {/* Dates & Statuses */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
               Due Date
             </label>
             <input
               type="date"
               {...register("dueDate")}
-              className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none font-medium text-slate-700"
+              className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none font-medium text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-950 [color-scheme:light] dark:[color-scheme:dark]"
             />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
               Initial Status
             </label>
             <select
               {...register("status")}
-              className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none bg-white font-medium text-slate-700"
+              className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none bg-white dark:bg-slate-950 font-medium text-slate-700 dark:text-slate-200"
             >
-              <option value="TODO">To Do</option>
-              <option value="BACKLOG">Backlog</option>
-              <option value="IN_PROGRESS">In Progress</option>
-              <option value="IN_REVIEW">In Review</option>
-              <option value="BLOCKED">Blocked</option>
+              <option value="TODO" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">To Do</option>
+              <option value="BACKLOG" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">Backlog</option>
+              <option value="IN_PROGRESS" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">In Progress</option>
+              <option value="IN_REVIEW" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">In Review</option>
+              <option value="BLOCKED" className="dark:bg-slate-950 text-slate-700 dark:text-slate-200">Blocked</option>
             </select>
           </div>
         </div>
 
         {/* Description */}
         <div>
-          <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
             Detailed Description
           </label>
           <textarea
             rows={3}
             placeholder="Outline task details, expectations, and limits..."
             {...register("description")}
-            className="w-full px-3 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none font-medium text-slate-700"
+            className="w-full px-3 py-2 text-xs border border-slate-200 dark:border-slate-800 rounded-lg focus:outline-none font-medium text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-950"
           />
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
-          <button
-            type="button"
-            onClick={() => {
-              setIsCreateOpen(false);
-              reset();
-            }}
-            className="px-4 py-2 text-xs font-semibold border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 transition-colors"
-          >
-            Cancel
-          </button>
+        <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
           <button
             type="submit"
             disabled={isSubmitting}

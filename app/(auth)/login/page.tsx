@@ -9,7 +9,7 @@ const page = () => {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950">
+    <main className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-slate-50 transition-colors duration-200">
       <div className="grid min-h-screen lg:grid-cols-[1.05fr_0.95fr]">
         <section className="relative hidden overflow-hidden bg-slate-950 px-10 py-10 text-white lg:flex lg:flex-col lg:justify-between">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(14,165,233,0.28),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(34,197,94,0.18),transparent_28%),linear-gradient(145deg,#020617_0%,#0f172a_55%,#111827_100%)]" />
@@ -72,44 +72,44 @@ const page = () => {
               </Link>
               <Link
                 href="/register"
-                className="text-sm font-medium text-cyan-700 hover:text-cyan-900"
+                className="text-sm font-medium text-cyan-700 dark:text-cyan-400 hover:text-cyan-900 dark:hover:text-cyan-300"
               >
                 Create account
               </Link>
             </div>
 
             <div className="mb-7">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-700">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-700 dark:text-cyan-400">
                 Sign in
               </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-slate-950 dark:text-slate-100">
                 Welcome back
               </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                 Access your workspace and continue managing tasks with your
                 team.
               </p>
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-white px-5 py-6 shadow-sm sm:px-8 sm:py-8">
+            <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-5 py-6 shadow-sm sm:px-8 sm:py-8">
               <Form />
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-slate-500">
-              <Link href="#" className="hover:text-slate-800">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-slate-500 dark:text-slate-400">
+              <Link href="#" className="hover:text-slate-800 dark:hover:text-slate-200">
                 Privacy Policy
               </Link>
-              <span className="text-slate-300">/</span>
-              <Link href="#" className="hover:text-slate-800">
+              <span className="text-slate-300 dark:text-slate-700">/</span>
+              <Link href="#" className="hover:text-slate-800 dark:hover:text-slate-200">
                 Terms
               </Link>
-              <span className="text-slate-300">/</span>
-              <Link href="#" className="hover:text-slate-800">
+              <span className="text-slate-300 dark:text-slate-700">/</span>
+              <Link href="#" className="hover:text-slate-800 dark:hover:text-slate-200">
                 Security
               </Link>
             </div>
 
-            <p className="mt-3 text-center text-xs text-slate-400">
+            <p className="mt-3 text-center text-xs text-slate-400 dark:text-slate-500">
               © {new Date().getFullYear()} WorkBridge. All rights reserved.
             </p>
           </div>
